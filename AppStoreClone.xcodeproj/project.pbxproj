@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		DD969941226348E400C26C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD969940226348E400C26C69 /* AppDelegate.swift */; };
-		DD969943226348E400C26C69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD969942226348E400C26C69 /* ViewController.swift */; };
 		DD969946226348E400C26C69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD969944226348E400C26C69 /* Main.storyboard */; };
 		DD969948226348E500C26C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD969947226348E500C26C69 /* Assets.xcassets */; };
 		DD96994B226348E500C26C69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD969949226348E500C26C69 /* LaunchScreen.storyboard */; };
+		DD96995322634AA800C26C69 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96995222634AA800C26C69 /* BaseTabBarController.swift */; };
+		DD9699562263561B00C26C69 /* AppsSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9699552263561B00C26C69 /* AppsSearchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DD96993D226348E400C26C69 /* AppStoreClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD969940226348E400C26C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DD969942226348E400C26C69 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DD969945226348E400C26C69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD969947226348E500C26C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD96994A226348E500C26C69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD96994C226348E500C26C69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD96995222634AA800C26C69 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		DD9699552263561B00C26C69 /* AppsSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsSearchController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,23 @@
 		DD96993F226348E400C26C69 /* AppStoreClone */ = {
 			isa = PBXGroup;
 			children = (
+				DD969954226355DF00C26C69 /* Controller */,
 				DD969940226348E400C26C69 /* AppDelegate.swift */,
-				DD969942226348E400C26C69 /* ViewController.swift */,
 				DD969944226348E400C26C69 /* Main.storyboard */,
 				DD969947226348E500C26C69 /* Assets.xcassets */,
 				DD969949226348E500C26C69 /* LaunchScreen.storyboard */,
 				DD96994C226348E500C26C69 /* Info.plist */,
 			);
 			path = AppStoreClone;
+			sourceTree = "<group>";
+		};
+		DD969954226355DF00C26C69 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD96995222634AA800C26C69 /* BaseTabBarController.swift */,
+				DD9699552263561B00C26C69 /* AppsSearchController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +146,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD969943226348E400C26C69 /* ViewController.swift in Sources */,
 				DD969941226348E400C26C69 /* AppDelegate.swift in Sources */,
+				DD96995322634AA800C26C69 /* BaseTabBarController.swift in Sources */,
+				DD9699562263561B00C26C69 /* AppsSearchController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
