@@ -62,6 +62,8 @@ class AppsSearchController: UICollectionViewController {
     cell.categoryLabel.text = appResult.primaryGenreName
     cell.ratingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
     
+    
+    
     return cell
   }
   
