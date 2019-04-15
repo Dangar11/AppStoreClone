@@ -9,12 +9,13 @@
 import UIKit
 
 
-class AppsController: BaseListController {
+class AppsPageController: BaseListController {
   
   
   
   //MARK: - Properties
   fileprivate let cellId = "appId"
+  fileprivate let headerId = "headerId"
   
   
   //MARK: - Lifecycle
@@ -22,8 +23,31 @@ class AppsController: BaseListController {
     super.viewDidLoad()
     
     collectionView.backgroundColor = .white
+    //Register cell
     collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellId)
+    
+    
+    //Register header
+    collectionView.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
   }
+  
+  //MARK: - Header
+  
+  
+  override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+    return header
+  }
+  
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    return .init(width: view.frame.width, height: 250)
+  }
+  
+  
+  
+  
+  //MARK: - Data Source
   
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -42,7 +66,7 @@ class AppsController: BaseListController {
 
 
 
-extension AppsController: UICollectionViewDelegateFlowLayout {
+extension AppsPageController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return .init(width: view.frame.width, height: 300)
