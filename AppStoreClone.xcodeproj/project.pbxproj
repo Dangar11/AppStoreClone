@@ -10,6 +10,8 @@
 		DD0563DB2263CFA800E0457B /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563DA2263CFA800E0457B /* SearchResultCell.swift */; };
 		DD0563DE2263D88D00E0457B /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563DD2263D88D00E0457B /* UIView+Layout.swift */; };
 		DD0563E02263DC9B00E0457B /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563DF2263DC9B00E0457B /* VerticalStackView.swift */; };
+		DD0563E3226481F200E0457B /* SearchrResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563E2226481F200E0457B /* SearchrResult.swift */; };
+		DD0563E6226488A600E0457B /* ServiceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563E5226488A600E0457B /* ServiceApi.swift */; };
 		DD969941226348E400C26C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD969940226348E400C26C69 /* AppDelegate.swift */; };
 		DD969946226348E400C26C69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD969944226348E400C26C69 /* Main.storyboard */; };
 		DD969948226348E500C26C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD969947226348E500C26C69 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 		DD0563DA2263CFA800E0457B /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		DD0563DD2263D88D00E0457B /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		DD0563DF2263DC9B00E0457B /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
+		DD0563E2226481F200E0457B /* SearchrResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchrResult.swift; sourceTree = "<group>"; };
+		DD0563E5226488A600E0457B /* ServiceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceApi.swift; sourceTree = "<group>"; };
 		DD96993D226348E400C26C69 /* AppStoreClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD969940226348E400C26C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD969945226348E400C26C69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -60,6 +64,22 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		DD0563E1226481D800E0457B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD0563E2226481F200E0457B /* SearchrResult.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DD0563E42264889600E0457B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DD0563E5226488A600E0457B /* ServiceApi.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		DD969934226348E400C26C69 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +99,8 @@
 		DD96993F226348E400C26C69 /* AppStoreClone */ = {
 			isa = PBXGroup;
 			children = (
+				DD0563E42264889600E0457B /* Service */,
+				DD0563E1226481D800E0457B /* Model */,
 				DD0563DC2263D86300E0457B /* Helpers */,
 				DD0563D92263CF8000E0457B /* Views */,
 				DD969954226355DF00C26C69 /* Controller */,
@@ -173,9 +195,11 @@
 			files = (
 				DD969941226348E400C26C69 /* AppDelegate.swift in Sources */,
 				DD0563E02263DC9B00E0457B /* VerticalStackView.swift in Sources */,
+				DD0563E3226481F200E0457B /* SearchrResult.swift in Sources */,
 				DD96995322634AA800C26C69 /* BaseTabBarController.swift in Sources */,
 				DD0563DB2263CFA800E0457B /* SearchResultCell.swift in Sources */,
 				DD9699562263561B00C26C69 /* AppsSearchController.swift in Sources */,
+				DD0563E6226488A600E0457B /* ServiceApi.swift in Sources */,
 				DD0563DE2263D88D00E0457B /* UIView+Layout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
