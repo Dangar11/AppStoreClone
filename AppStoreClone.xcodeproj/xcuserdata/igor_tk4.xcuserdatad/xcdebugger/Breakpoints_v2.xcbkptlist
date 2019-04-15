@@ -10,59 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Controller/AppsSearchController.swift"
-            timestampString = "577021869.282259"
+            timestampString = "577028737.8101439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "AppsSearchController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AppStoreClone.AppsSearchController.__allocating_init() -&gt; AppStoreClone.AppsSearchController"
-                  moduleName = "AppStoreClone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/igor_tk4/Desktop/AppStoreClone/AppStoreClone/Controller/AppsSearchController.swift"
-                  timestampString = "576935725.308977"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AppStoreClone.AppsSearchController.init() -&gt; AppStoreClone.AppsSearchController"
-                  moduleName = "AppStoreClone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/igor_tk4/Desktop/AppStoreClone/AppStoreClone/Controller/AppsSearchController.swift"
-                  timestampString = "576935725.3120281"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "26">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppStoreClone/Controller/AppsSearchController.swift"
-            timestampString = "577021869.283108"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "fetchItunesApps()"
             landmarkType = "7">
             <Locations>
@@ -106,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Controller/AppsSearchController.swift"
-            timestampString = "577021869.283595"
+            timestampString = "577028737.811065"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "fetchItunesApps()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Service/ServiceApi.swift"
-            timestampString = "577021869.284075"
+            timestampString = "577034346.57584"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -138,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Controller/AppsSearchController.swift"
-            timestampString = "577021869.284122"
+            timestampString = "577028737.812086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "fetchItunesApps()"
             landmarkType = "7">
             <Locations>

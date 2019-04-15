@@ -11,8 +11,9 @@ import SDWebImage
 
 private let reuseIdentifier = "Cell"
 
-class AppsSearchController: UICollectionViewController {
+class SearchController: BaseListController {
 
+  //MARK: - Properties
   
   fileprivate let cellId = "searchCell"
   fileprivate let searchController = UISearchController(searchResultsController: nil)
@@ -29,6 +30,8 @@ class AppsSearchController: UICollectionViewController {
   
   var timer: Timer?
 
+  //MARK: - Lifecycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -36,7 +39,8 @@ class AppsSearchController: UICollectionViewController {
     collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
     
     collectionView.addSubview(enterSearchTermLabel)
-    enterSearchTermLabel.fillSuperview(padding: .init(top: 100, left: 50, bottom: 0, right: 50))
+    enterSearchTermLabel.fillSuperview(padding: .init(top: 100, left: 0, bottom: 0, right: 0))
+    enterSearchTermLabel.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
     enterSearchTermLabel.layer.opacity = 0
     
     
@@ -45,6 +49,9 @@ class AppsSearchController: UICollectionViewController {
     animateSearchLabel(opacity: 1)
     
   }
+  
+  
+    //MARK: - Helper Function
   
   
   fileprivate func setupSearchBar() {
@@ -63,7 +70,7 @@ class AppsSearchController: UICollectionViewController {
   }
   
   
-  
+
   fileprivate func fetchItunesApps()  {
     
     Service.shared.fetchApps(searchTerm: "") { [unowned self] results, error  in
@@ -83,6 +90,7 @@ class AppsSearchController: UICollectionViewController {
   }
   
   
+  //MARK: - Data Source
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return appResults.count
@@ -96,23 +104,11 @@ class AppsSearchController: UICollectionViewController {
     return cell
   }
   
-  
-  
-  
-  init() {
-    super.init(collectionViewLayout: UICollectionViewFlowLayout())
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  
 
 }
 
 
-extension AppsSearchController: UICollectionViewDelegateFlowLayout {
+extension SearchController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return .init(width: view.frame.width, height: 350)
@@ -121,10 +117,11 @@ extension AppsSearchController: UICollectionViewDelegateFlowLayout {
 }
 
 
-extension AppsSearchController: UISearchBarDelegate {
+extension SearchController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     
+    let searchText = searchText.replacingOccurrences(of: " ", with: "+")
     
     //delay before performing the search
     //throttling the search
