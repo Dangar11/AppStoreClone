@@ -17,6 +17,9 @@ class AppsPageController: BaseListController {
   fileprivate let cellId = "appId"
   fileprivate let headerId = "headerId"
   
+  var editorsChoiceGames: AppGroup?
+  
+  var groups = [AppGroup]()
   
   //MARK: - Lifecycle
   override func viewDidLoad() {
@@ -29,7 +32,35 @@ class AppsPageController: BaseListController {
     
     //Register header
     collectionView.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+    
+    fetchData() 
+    
   }
+  
+  fileprivate func fetchData() {
+    
+    Service.shared.fetchGames { [unowned self] (appGroup, error) in
+      
+      if let error = error {
+      print("Failed to fetch games", error)
+        return
+      }
+      
+      self.editorsChoiceGames = appGroup
+      
+      guard let appGroup = appGroup else { return }
+      self.groups.append(appGroup)
+      self.groups.append(appGroup)
+      
+      
+      DispatchQueue.main.async {
+        self.collectionView.reloadData()
+      }
+      
+    }
+    
+  }
+  
   
   //MARK: - Header
   
@@ -41,7 +72,7 @@ class AppsPageController: BaseListController {
   
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    return .init(width: view.frame.width, height: 250)
+    return .init(width: view.frame.width, height: 0)
   }
   
   
@@ -51,12 +82,17 @@ class AppsPageController: BaseListController {
   
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return groups.count
   }
   
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppsGroupCell
+    
+    cell.titleLabel.text = editorsChoiceGames?.feed.title ?? ""
+    cell.horizontalController.appGroup = editorsChoiceGames
+    cell.horizontalController.collectionView.reloadData()
+    
     return cell
   }
   

@@ -17,7 +17,7 @@ class AppRowCell: UICollectionViewCell {
   
   let nameLabel = UILabel(text: "App Name", font: .systemFont(ofSize: 20))
   
-  let compamyButton = UILabel(text: "Company Name", font: .systemFont(ofSize: 13))
+  let compamyLabel = UILabel(text: "Company Name", font: .systemFont(ofSize: 13))
     
   let getButton = UIButton(title: "GET")
   
@@ -38,7 +38,7 @@ class AppRowCell: UICollectionViewCell {
     getButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
     
     let verticalStackView = VerticalStackView(arrangedSubviews: [
-      nameLabel, compamyButton
+      nameLabel, compamyLabel
       ], spacing: 4)
     
     

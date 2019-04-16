@@ -14,6 +14,8 @@ class AppsHorizontalController: BaseListController {
   
   fileprivate let cellId = "topCellId"
   
+  var appGroup: AppGroup?
+  
   let topBottomPadding: CGFloat = 12
   let lineSpacing: CGFloat = 10
   
@@ -32,11 +34,15 @@ class AppsHorizontalController: BaseListController {
   //MARK: - Data Source
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return appGroup?.feed.results.count ?? 0
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppRowCell
+    let app = appGroup?.feed.results[indexPath.item]
+    cell.compamyLabel.text = app?.artistName
+    cell.nameLabel.text = app?.name
+    cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
     return cell
   }
   

@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Service/ServiceApi.swift"
-            timestampString = "577044872.56405"
+            timestampString = "577112478.237327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "fetchApps(searchTerm:completion:)"
             landmarkType = "7">
          </BreakpointContent>

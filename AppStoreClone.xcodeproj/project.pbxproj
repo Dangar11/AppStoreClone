@@ -28,6 +28,7 @@
 		DDED7F6C2265038C002043EF /* AppsPageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDED7F6B2265038C002043EF /* AppsPageHeader.swift */; };
 		DDED7F6E2265051A002043EF /* AppsHeaderHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDED7F6D2265051A002043EF /* AppsHeaderHorizontalController.swift */; };
 		DDED7F70226507C4002043EF /* AppsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDED7F6F226507C4002043EF /* AppsHeaderCell.swift */; };
+		DDED7F722265ECBD002043EF /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDED7F712265ECBD002043EF /* AppGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		DDED7F6B2265038C002043EF /* AppsPageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsPageHeader.swift; sourceTree = "<group>"; };
 		DDED7F6D2265051A002043EF /* AppsHeaderHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderHorizontalController.swift; sourceTree = "<group>"; };
 		DDED7F6F226507C4002043EF /* AppsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderCell.swift; sourceTree = "<group>"; };
+		DDED7F712265ECBD002043EF /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				DD0563E2226481F200E0457B /* SearchResult.swift */,
+				DDED7F712265ECBD002043EF /* AppGroup.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				DDED7F70226507C4002043EF /* AppsHeaderCell.swift in Sources */,
 				DDED7F6E2265051A002043EF /* AppsHeaderHorizontalController.swift in Sources */,
 				DD0563E6226488A600E0457B /* ServiceApi.swift in Sources */,
+				DDED7F722265ECBD002043EF /* AppGroup.swift in Sources */,
 				DD8F10672264CF740030E007 /* AppRowCell.swift in Sources */,
 				DD0563DE2263D88D00E0457B /* UIView+Layout.swift in Sources */,
 				DD8F10652264C6670030E007 /* AppsHorizontalController.swift in Sources */,
