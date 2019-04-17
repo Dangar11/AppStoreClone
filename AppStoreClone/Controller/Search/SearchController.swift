@@ -80,7 +80,7 @@ class SearchController: BaseListController {
       }
       
       //get back our search results Success
-      self.appResults = results
+      self.appResults = results?.results ?? []
       DispatchQueue.main.async {
         self.collectionView.reloadData()
       }
@@ -140,7 +140,7 @@ extension SearchController: UISearchBarDelegate {
       
       //fire the search
       Service.shared.fetchApps(searchTerm: searchText) { (result, error) in
-        self.appResults = result
+        self.appResults = result?.results ?? []
         DispatchQueue.main.async {
           self.collectionView.reloadData()
         }

@@ -95,7 +95,7 @@ class AppsPageController: BaseListController {
     Service.shared.fetchSocialApps { (appsHeader, error) in
       
       dispatchGroup.leave()
-      group4 = appsHeader
+      group4 = appsHeader?.results
       
       
     }
