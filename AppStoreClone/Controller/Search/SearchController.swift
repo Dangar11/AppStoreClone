@@ -18,7 +18,7 @@ class SearchController: BaseListController {
   fileprivate let cellId = "searchCell"
   fileprivate let searchController = UISearchController(searchResultsController: nil)
   
-  fileprivate var appResults = [Result]()
+  fileprivate var appResults = [ResultJSON]()
   
   fileprivate let enterSearchTermLabel: UILabel = {
     let label = UILabel()

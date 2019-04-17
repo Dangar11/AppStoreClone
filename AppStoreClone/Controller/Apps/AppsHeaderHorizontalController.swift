@@ -9,7 +9,7 @@
 import UIKit
 
 
-class AppsHeaderHorizontalController : BaseListController {
+class AppsHeaderHorizontalController : HorizontalSnappingController {
   
   
   fileprivate let cellId = "cellId"
@@ -23,9 +23,7 @@ class AppsHeaderHorizontalController : BaseListController {
     
     collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: cellId)
     
-    if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-      layout.scrollDirection = .horizontal
-    }
+    
     
     
   }

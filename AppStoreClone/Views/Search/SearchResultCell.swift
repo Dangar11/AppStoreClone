@@ -11,7 +11,7 @@ import UIKit
 class SearchResultCell: UICollectionViewCell {
   
   
-  var appResult: Result! {
+  var appResult: ResultJSON! {
     didSet {
       
       nameLabel.text = appResult.trackName

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppsHorizontalController: BaseListController {
+class AppsHorizontalController: HorizontalSnappingController {
   
   //MARK: - Properties
   
@@ -25,9 +25,6 @@ class AppsHorizontalController: BaseListController {
     collectionView.backgroundColor = .white
     collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: cellId)
     
-    if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-      layout.scrollDirection = .horizontal
-    }
   }
   
   
