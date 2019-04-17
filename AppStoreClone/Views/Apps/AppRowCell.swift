@@ -36,6 +36,7 @@ class AppRowCell: UICollectionViewCell {
     getButton.constrainHeight(constant: 32)
     getButton.layer.cornerRadius = 32 / 2
     getButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    getButton.tintColor = UIColor(red:55/255.0, green:107/255.0, blue:194/255.0, alpha:1.0)
     
     let verticalStackView = VerticalStackView(arrangedSubviews: [
       nameLabel, compamyLabel

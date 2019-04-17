@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Controller/Apps/AppsHorizontalController.swift"
-            timestampString = "577112478.237769"
+            timestampString = "577201954.548516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -25,13 +25,61 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppStoreClone/Controller/Apps/AppsPageController.swift"
-            timestampString = "577112478.2378269"
+            filePath = "AppStoreClone/Service/ServiceApi.swift"
+            timestampString = "577201954.548588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "fetchData()"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "fetchSocialApps(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppStoreClone.Service.fetchInstagramApps() -&gt; ()"
+                  moduleName = "AppStoreClone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/igor_tk4/Desktop/AppStoreClone/AppStoreClone/Service/ServiceApi.swift"
+                  timestampString = "577195415.53722"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "366">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in AppStoreClone.Service.fetchInstagramApps() -&gt; ()"
+                  moduleName = "AppStoreClone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/igor_tk4/Desktop/AppStoreClone/AppStoreClone/Service/ServiceApi.swift"
+                  timestampString = "577195415.540084"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "160">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppStoreClone/Service/ServiceApi.swift"
+            timestampString = "577201954.548664"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "fetchSocialApps(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

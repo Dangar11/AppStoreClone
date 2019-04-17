@@ -38,3 +38,11 @@ extension UIButton {
     self.setTitle(title, for: .normal)
   }
 }
+
+//Trim string to a first given character and return that trimed string 
+extension String {
+  func trimStringToSign(sign: String) -> String {
+    let string = self.components(separatedBy: sign)
+    return string[0]
+  }
+}

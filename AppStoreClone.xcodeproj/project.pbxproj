@@ -29,6 +29,7 @@
 		DDED7F6E2265051A002043EF /* AppsHeaderHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDED7F6D2265051A002043EF /* AppsHeaderHorizontalController.swift */; };
 		DDED7F70226507C4002043EF /* AppsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDED7F6F226507C4002043EF /* AppsHeaderCell.swift */; };
 		DDED7F722265ECBD002043EF /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDED7F712265ECBD002043EF /* AppGroup.swift */; };
+		DDED7F74226749FF002043EF /* HeaderGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDED7F73226749FF002043EF /* HeaderGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		DDED7F6D2265051A002043EF /* AppsHeaderHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderHorizontalController.swift; sourceTree = "<group>"; };
 		DDED7F6F226507C4002043EF /* AppsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderCell.swift; sourceTree = "<group>"; };
 		DDED7F712265ECBD002043EF /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		DDED7F73226749FF002043EF /* HeaderGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			children = (
 				DD0563E2226481F200E0457B /* SearchResult.swift */,
 				DDED7F712265ECBD002043EF /* AppGroup.swift */,
+				DDED7F73226749FF002043EF /* HeaderGroup.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				DD0563DE2263D88D00E0457B /* UIView+Layout.swift in Sources */,
 				DD8F10652264C6670030E007 /* AppsHorizontalController.swift in Sources */,
 				DD8F10692264D1130030E007 /* Extensions.swift in Sources */,
+				DDED7F74226749FF002043EF /* HeaderGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

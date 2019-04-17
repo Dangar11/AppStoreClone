@@ -14,6 +14,8 @@ class AppsHeaderHorizontalController : BaseListController {
   
   fileprivate let cellId = "cellId"
   
+  var headerApp = [ResultHeader]()
+  
   //MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,8 +27,15 @@ class AppsHeaderHorizontalController : BaseListController {
       layout.scrollDirection = .horizontal
     }
     
+    
   }
   
+  
+  
+  func fetchData() {
+    
+    
+  }
   
   
   
@@ -34,12 +43,16 @@ class AppsHeaderHorizontalController : BaseListController {
   
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return headerApp.count
   }
   
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppsHeaderCell
+    let app = self.headerApp[indexPath.item]
+    cell.companyLabel.text = app.artistName
+    cell.titleLabel .text = String(app.description.prefix(37))
+    cell.imageView.sd_setImage(with: URL(string: app.artworkUrl512))
     return cell
   }
   
@@ -57,7 +70,7 @@ extension AppsHeaderHorizontalController: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return .init(top: 0, left: 16, bottom: 0, right: 0)
+    return .init(top: 0, left: 16, bottom: 0, right: 16)
   }
   
   
