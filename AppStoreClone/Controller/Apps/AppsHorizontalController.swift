@@ -16,6 +16,8 @@ class AppsHorizontalController: HorizontalSnappingController {
   
   var appGroup: AppGroup?
   
+  var didSelectHadler: ((FeedResult) -> ())?
+  
   let topBottomPadding: CGFloat = 12
   let lineSpacing: CGFloat = 10
   
@@ -44,6 +46,11 @@ class AppsHorizontalController: HorizontalSnappingController {
   }
   
   
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let app = appGroup?.feed.results[indexPath.item]
+    guard let appGroups = app else { return }
+    didSelectHadler?(appGroups)
+  }
   
   
 }

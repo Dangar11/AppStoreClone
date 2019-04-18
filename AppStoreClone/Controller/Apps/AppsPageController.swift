@@ -154,11 +154,19 @@ class AppsPageController: BaseListController {
     cell.titleLabel.text = appGroups.feed.title
     cell.horizontalController.appGroup = appGroups
     cell.horizontalController.collectionView.reloadData()
+    cell.horizontalController.didSelectHadler = { [weak self] feedResult in
+      
+      let controller = AppsDetailsController()
+      controller.appId = feedResult.id
+      controller.navigationItem.title = feedResult.name
+      
+      self?.navigationController?.pushViewController(controller, animated: true)
+    }
     
     return cell
   }
   
-  
+
   
 }
 
