@@ -13,6 +13,7 @@ import UIKit
 class AppRowCell: UICollectionViewCell {
   
   
+  
   let imageView = UIImageView(cornerRadius: 8)
   
   let nameLabel = UILabel(text: "App Name", font: .systemFont(ofSize: 20))
@@ -20,6 +21,19 @@ class AppRowCell: UICollectionViewCell {
   let compamyLabel = UILabel(text: "Company Name", font: .systemFont(ofSize: 13))
     
   let getButton = UIButton(title: "GET")
+  
+  let separatorLine : UIView = {
+    let separator = UIView(frame: .zero)
+    separator.backgroundColor = UIColor.lightGray
+    return separator
+  }()
+  
+  
+  let separatorLineForBottom: UIView = {
+    let separator = UIView(frame: .zero)
+    separator.backgroundColor = UIColor.lightGray
+    return separator
+  }()
   
   
   
@@ -30,6 +44,13 @@ class AppRowCell: UICollectionViewCell {
     imageView.backgroundColor = .purple
     imageView.constrainWidth(constant: 64)
     imageView.constrainHeight(constant: 64)
+    
+    separatorLine.widthAnchor.constraint(equalToConstant: frame.width)
+    separatorLine.heightAnchor.constraint(equalToConstant: 1.0)
+    
+    separatorLineForBottom.widthAnchor.constraint(equalToConstant: frame.width)
+    separatorLineForBottom.heightAnchor.constraint(equalToConstant: 1.0)
+    separatorLineForBottom.isHidden = true
     
     getButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
     getButton.constrainWidth(constant: 80)
@@ -50,7 +71,13 @@ class AppRowCell: UICollectionViewCell {
     
     stackView.alignment = .center
     addSubview(stackView)
-    stackView.fillSuperview()
+    addSubview(separatorLine)
+    addSubview(separatorLineForBottom)
+    stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
+    separatorLine.anchor(top: stackView.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 9, left: 64, bottom: 0, right: 0))
+    separatorLineForBottom.anchor(top: stackView.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 9, left: 0, bottom: 0, right: 0))
+    
+    
   }
   
   required init?(coder aDecoder: NSCoder) {

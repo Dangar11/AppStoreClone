@@ -42,6 +42,17 @@ class AppsHorizontalController: HorizontalSnappingController {
     cell.compamyLabel.text = app?.artistName
     cell.nameLabel.text = app?.name
     cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
+    
+    
+    //Separator logic index starts from 0, add + 1 to make all 3-ird cell to show long separator, and for other cells shor separator
+    if (indexPath.item + 1) % 3 == 0 {
+      cell.separatorLine.isHidden = true
+      cell.separatorLineForBottom.isHidden = false
+    } else {
+      cell.separatorLine.isHidden = false
+      cell.separatorLineForBottom.isHidden = true
+    }
+  
     return cell
   }
   

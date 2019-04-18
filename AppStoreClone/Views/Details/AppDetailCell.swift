@@ -19,6 +19,8 @@ class AppDetailCell: UICollectionViewCell {
     }
   }
   
+
+  
   let appIconImageView = UIImageView(cornerRadius: 16)
   
   let nameLabel = UILabel(text: "App Name", font: .boldSystemFont(ofSize: 24), numberOfLines: 2)
@@ -29,11 +31,15 @@ class AppDetailCell: UICollectionViewCell {
   
   let releaseNotesLabel = UILabel(text: "Release Notes", font: .systemFont(ofSize: 18), numberOfLines: 0)
   
+  let separatorLine : UIView = {
+    let separator = UIView(frame: .zero)
+    separator.backgroundColor = UIColor.lightGray
+    return separator
+  }()
+  
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
-    backgroundColor = .lightGray
     
     appIconImageView.backgroundColor = .red
     appIconImageView.constrainWidth(constant: 140)
@@ -44,6 +50,9 @@ class AppDetailCell: UICollectionViewCell {
     priceButton.layer.cornerRadius = 32 / 2
     priceButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
     priceButton.setTitleColor(.white, for: .normal)
+    
+    separatorLine.widthAnchor.constraint(equalToConstant: frame.width)
+    separatorLine.heightAnchor.constraint(equalToConstant: 1.0)
     
     //To cut the button size
     let buttonStackView = UIStackView(arrangedSubviews: [priceButton, UIView()])
@@ -65,7 +74,9 @@ class AppDetailCell: UICollectionViewCell {
        whatsNewLabel,
        releaseNotesLabel], spacing: 16)
     addSubview(mainStackView)
+    addSubview(separatorLine)
     mainStackView.fillSuperview(padding: .init(top: 20, left: 20, bottom: 20, right: 20))
+    separatorLine.anchor(top: mainStackView.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 19, left: 20, bottom: 0, right: 20))
   }
   
   required init?(coder aDecoder: NSCoder) {

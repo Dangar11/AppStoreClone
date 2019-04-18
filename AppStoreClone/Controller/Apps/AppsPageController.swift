@@ -182,4 +182,5 @@ extension AppsPageController: UICollectionViewDelegateFlowLayout {
     return .init(top: 16, left: 0, bottom: 0, right: 0)
   }
   
+  
 }

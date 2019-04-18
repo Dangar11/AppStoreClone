@@ -15,6 +15,9 @@
 		DD0563E02263DC9B00E0457B /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563DF2263DC9B00E0457B /* VerticalStackView.swift */; };
 		DD0563E3226481F200E0457B /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563E2226481F200E0457B /* SearchResult.swift */; };
 		DD0563E6226488A600E0457B /* ServiceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563E5226488A600E0457B /* ServiceApi.swift */; };
+		DD75C76A2268CCAF000372E4 /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75C7692268CCAF000372E4 /* PreviewCell.swift */; };
+		DD75C76C2268CE88000372E4 /* PreviewScreenshotsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75C76B2268CE88000372E4 /* PreviewScreenshotsController.swift */; };
+		DD75C76E2268CFA1000372E4 /* ScreenshotsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75C76D2268CFA1000372E4 /* ScreenshotsCell.swift */; };
 		DD8F105C2264C0AB0030E007 /* AppsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8F105B2264C0AA0030E007 /* AppsPageController.swift */; };
 		DD8F105E2264C1F30030E007 /* BaseListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8F105D2264C1F30030E007 /* BaseListController.swift */; };
 		DD8F10622264C3D60030E007 /* AppsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8F10612264C3D60030E007 /* AppsGroupCell.swift */; };
@@ -46,6 +49,9 @@
 		DD0563DF2263DC9B00E0457B /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		DD0563E2226481F200E0457B /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		DD0563E5226488A600E0457B /* ServiceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceApi.swift; sourceTree = "<group>"; };
+		DD75C7692268CCAF000372E4 /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
+		DD75C76B2268CE88000372E4 /* PreviewScreenshotsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewScreenshotsController.swift; sourceTree = "<group>"; };
+		DD75C76D2268CFA1000372E4 /* ScreenshotsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotsCell.swift; sourceTree = "<group>"; };
 		DD8F105B2264C0AA0030E007 /* AppsPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsPageController.swift; sourceTree = "<group>"; };
 		DD8F105D2264C1F30030E007 /* BaseListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListController.swift; sourceTree = "<group>"; };
 		DD8F10612264C3D60030E007 /* AppsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsGroupCell.swift; sourceTree = "<group>"; };
@@ -101,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				DD00722D22688B8A00612232 /* AppsDetailsController.swift */,
+				DD75C76B2268CE88000372E4 /* PreviewScreenshotsController.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -109,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				DD0072302268940E00612232 /* AppDetailCell.swift */,
+				DD75C7692268CCAF000372E4 /* PreviewCell.swift */,
+				DD75C76D2268CFA1000372E4 /* ScreenshotsCell.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -360,12 +369,15 @@
 				DD8F105E2264C1F30030E007 /* BaseListController.swift in Sources */,
 				DD969941226348E400C26C69 /* AppDelegate.swift in Sources */,
 				DD8F10622264C3D60030E007 /* AppsGroupCell.swift in Sources */,
+				DD75C76C2268CE88000372E4 /* PreviewScreenshotsController.swift in Sources */,
+				DD75C76A2268CCAF000372E4 /* PreviewCell.swift in Sources */,
 				DDED7F6C2265038C002043EF /* AppsPageHeader.swift in Sources */,
 				DD0563E02263DC9B00E0457B /* VerticalStackView.swift in Sources */,
 				DD8F105C2264C0AB0030E007 /* AppsPageController.swift in Sources */,
 				DD0563E3226481F200E0457B /* SearchResult.swift in Sources */,
 				DD96995322634AA800C26C69 /* BaseTabBarController.swift in Sources */,
 				DD0563DB2263CFA800E0457B /* SearchResultCell.swift in Sources */,
+				DD75C76E2268CFA1000372E4 /* ScreenshotsCell.swift in Sources */,
 				DD9699562263561B00C26C69 /* SearchController.swift in Sources */,
 				DDED7F70226507C4002043EF /* AppsHeaderCell.swift in Sources */,
 				DDED7F6E2265051A002043EF /* AppsHeaderHorizontalController.swift in Sources */,
