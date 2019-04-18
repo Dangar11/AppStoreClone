@@ -15,12 +15,18 @@ class AppsDetailsController: BaseListController {
   
   var appId: String! {
     didSet {
-      print("Here is AppId:", appId)
       let urlString = "https://itunes.apple.com/lookup?id=\(appId ?? "")"
       Service.shared.fetchGenericJSONData(urlString: urlString) { (result: SearchResult?, error) in
+        let app = result?.results.first
+        self.app = app
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
       }
     }
   }
+  
+  var app: ResultJSON?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -43,6 +49,9 @@ class AppsDetailsController: BaseListController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppDetailCell
     
+    cell.app = app
+    
+    
     return cell
   }
   
@@ -53,6 +62,17 @@ extension AppsDetailsController: UICollectionViewDelegateFlowLayout {
   
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return .init(width: view.frame.width, height: 300)
+    
+    // calculate the necessary size for our cell to fit the text
+    let helperCell = AppDetailCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 1000))
+    
+    helperCell.app = app
+    helperCell.layoutIfNeeded()
+    
+    let estimatedSize = helperCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
+    
+    
+    
+    return .init(width: view.frame.width, height: estimatedSize.height)
   }
 }
