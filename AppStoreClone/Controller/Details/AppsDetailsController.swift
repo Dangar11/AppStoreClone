@@ -13,6 +13,7 @@ class AppsDetailsController: BaseListController {
   
   let cellId = "detailCellId"
   let previewCellId = "previewCellId"
+  let reviewCellId = "reviewCellId"
   
   var appId: String! {
     didSet {
@@ -24,10 +25,30 @@ class AppsDetailsController: BaseListController {
           self.collectionView.reloadData()
         }
       }
+      
+      let reviewsUrl = "https://itunes.apple.com/rss/customerreviews/page=1/id=\(appId ?? "")/sortby=mostrecent/json?l=en&cc=us"
+      
+      Service.shared.fetchGenericJSONData(urlString: reviewsUrl) { (reviews: Reviews?, error) in
+        
+        if let error = error {
+          print(error)
+        }
+        
+        self.reviews = reviews
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
+        
+//        reviews?.feed.entry.forEach({ (entry) in
+//          print(entry.title.label, entry.author.name.label, entry.content.label)
+//        })
+        
+      }
     }
   }
   
   var app: ResultJSON?
+  var reviews: Reviews?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,6 +57,7 @@ class AppsDetailsController: BaseListController {
     
     collectionView.register(AppDetailCell.self, forCellWithReuseIdentifier: cellId)
     collectionView.register(PreviewCell.self, forCellWithReuseIdentifier: previewCellId)
+    collectionView.register(ReviewRowCell.self, forCellWithReuseIdentifier: reviewCellId)
     navigationItem.largeTitleDisplayMode = .never
   }
   
@@ -45,7 +67,7 @@ class AppsDetailsController: BaseListController {
   //MARK: - Data Source
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 2
+    return 3
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -59,6 +81,10 @@ class AppsDetailsController: BaseListController {
     case 1:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: previewCellId, for: indexPath) as! PreviewCell
       cell.horizontalController.app = self.app
+      return cell
+    case 2:
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewCellId, for: indexPath) as! ReviewRowCell
+      cell.reviewsController.reviews = self.reviews
       return cell
     default:
       return UICollectionViewCell()
@@ -75,6 +101,8 @@ extension AppsDetailsController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
+    var height: CGFloat = 280
+    
     switch indexPath.item {
     case 0:
       // calculate the necessary size for our cell to fit the text
@@ -85,15 +113,16 @@ extension AppsDetailsController: UICollectionViewDelegateFlowLayout {
       
       let estimatedSize = helperCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
       
-      return .init(width: view.frame.width, height: estimatedSize.height)
-      
+      height = estimatedSize.height
     case 1:
-      return .init(width: view.frame.width, height: 500)
-      
+      height = 500
+    case 2:
+      height = 250
     default:
-      return .init(width: view.frame.width, height: 300)
+      height = 250
     }
     
+    return .init(width: view.frame.width, height: height)
  
   }
 }
