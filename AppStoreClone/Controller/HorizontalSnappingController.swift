@@ -35,7 +35,7 @@ class SnappingLayout: UICollectionViewFlowLayout {
     //48 from AppsHorizontalController
     let itemWidth = collectionView.frame.width - 48
     
-    let itemSpace = itemWidth + minimumInteritemSpacing
+    let itemSpace = itemWidth + 10
     var pageNumber = round(collectionView.contentOffset.x / itemSpace)
     
     // Skip to the next cell, if there is residual scrolling velocity left.

@@ -28,6 +28,7 @@ class SearchController: BaseListController {
     return label
   }()
   
+  
   var timer: Timer?
 
   //MARK: - Lifecycle
@@ -104,6 +105,12 @@ class SearchController: BaseListController {
     return cell
   }
   
+  
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let appId = String(appResults[indexPath.item].trackId)
+    let appDetailController = AppsDetailsController(appId: appId)
+    navigationController?.pushViewController(appDetailController, animated: true)
+  }
 
 }
 
@@ -140,6 +147,12 @@ extension SearchController: UISearchBarDelegate {
       
       //fire the search
       Service.shared.fetchApps(searchTerm: searchText) { (result, error) in
+        
+        if let error = error {
+          print("Failed to fetch apps: ", error)
+          return
+        }
+        
         self.appResults = result?.results ?? []
         DispatchQueue.main.async {
           self.collectionView.reloadData()

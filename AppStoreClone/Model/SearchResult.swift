@@ -16,15 +16,16 @@ struct SearchResult: Decodable {
 }
 
 struct ResultJSON: Decodable {
+  let trackId: Int
   let trackName: String
   let primaryGenreName: String
   var averageUserRating: Float?
   let screenshotUrls: [String]
   let artworkUrl100: String // appIcon
   let artworkUrl512: String
-  let formattedPrice: String
+  var formattedPrice: String?
   let description: String
-  let releaseNotes: String
+  var releaseNotes: String?
 }
 
 
