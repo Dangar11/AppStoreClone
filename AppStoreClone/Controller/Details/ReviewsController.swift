@@ -40,6 +40,17 @@ class ReviewsController: HorizontalSnappingController {
     cell.titleLabel.text = entry?.title.label
     cell.authorLabel.text = entry?.author.name.label
     cell.bodyLabel.text = entry?.content.label
+    
+    //Get the index inside of starsStackView and compare with rating from API
+    //Set the alpha value comparing 2 values to 1 or 0 
+    for (index, view) in cell.starsStackView.arrangedSubviews.enumerated() {
+      if let rating = Int(entry?.rating.label ?? "0") {
+        view.alpha = index >= rating ? 0 : 1
+      }
+    }
+    
+    
+    
     return cell
   }
   

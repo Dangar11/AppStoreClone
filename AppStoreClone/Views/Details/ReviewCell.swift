@@ -16,10 +16,22 @@ class ReviewCell: UICollectionViewCell {
   
   let authorLabel = UILabel(text: "Author", font: .systemFont(ofSize: 16))
   
-  let starsLabel = UILabel(text: "Stars", font: .systemFont(ofSize: 14))
+  let bodyLabel = UILabel(text: "Review body\nReview body\nReview body\nReview body\n", font: .systemFont(ofSize: 16), numberOfLines: 0)
   
-  let bodyLabel = UILabel(text: "Review body\nReview body\nReview body\nReview body\n", font: .systemFont(ofSize: 14), numberOfLines: 0)
-  
+  let starsStackView : UIStackView = {
+    var arrangedSubviews = [UIView]()
+    (0..<5).forEach({ (_) in
+      let imageView = UIImageView(image: UIImage(named: "star"))
+      imageView.constrainWidth(constant: 36)
+      imageView.constrainHeight(constant: 36)
+      arrangedSubviews.append(imageView)
+    })
+    
+    arrangedSubviews.append(UIView())
+    
+    let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
+    return stackView
+  }()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -34,10 +46,13 @@ class ReviewCell: UICollectionViewCell {
     
     let stackView = VerticalStackView(arrangedSubviews: [
       topStackView,
-      starsLabel,
-      bodyLabel
-      ], spacing: 20)
+      starsStackView,
+      bodyLabel, UIView()
+      ], spacing: 16)
+    //give the priority to resist cut
     titleLabel.setContentCompressionResistancePriority(.init(0), for: .horizontal)
+    
+    
     
     addSubview(stackView)
     stackView.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))

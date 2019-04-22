@@ -10,6 +10,7 @@ import Foundation
 
 
 
+
 struct Reviews: Decodable {
   let feed: ReviewFeed
 }
@@ -24,6 +25,14 @@ struct Entry: Decodable {
   let title: Label
   let content: Label
   let author: Author
+  
+  let rating: Label
+
+  private enum CodingKeys: String, CodingKey {
+    case author, title, content
+    case rating = "im:rating"
+  }
+  
 }
 
 
