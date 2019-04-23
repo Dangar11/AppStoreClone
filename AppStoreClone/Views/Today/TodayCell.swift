@@ -11,8 +11,15 @@ import UIKit
 
 class TodayCell: UICollectionViewCell {
   
+  var todayItem: TodayItem! {
+    didSet {
+      imageView.image = todayItem.image
+    }
+    
+  }
+  
 
-  let imageView = UIImageView(image: UIImage(named: "avengers"))
+  let imageView = UIImageView(image: #imageLiteral(resourceName: "men-in-black"))
   
   
   override init(frame: CGRect) {
@@ -20,10 +27,12 @@ class TodayCell: UICollectionViewCell {
     
     backgroundColor = .white
     layer.cornerRadius = 16
+    clipsToBounds = true
     
     addSubview(imageView)
     imageView.contentMode = .scaleAspectFill
-    imageView.centerInSuperview(size: .init(width: 250, height: 250))
+    imageView.fillSuperview()
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
