@@ -20,7 +20,12 @@ class AppRowCell: UICollectionViewCell {
   
   let compamyLabel = UILabel(text: "Company Name", font: .systemFont(ofSize: 13))
     
-  let getButton = UIButton(title: "GET")
+  let getButton : UIButton = {
+    let btn = UIButton(type: .system)
+    btn.setImage(#imageLiteral(resourceName: "download"), for: .normal)
+    btn.tintColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+    return btn
+  }()
   
   let separatorLine : UIView = {
     let separator = UIView(frame: .zero)
@@ -52,12 +57,8 @@ class AppRowCell: UICollectionViewCell {
     separatorLineForBottom.heightAnchor.constraint(equalToConstant: 1.0)
     separatorLineForBottom.isHidden = true
     
-    getButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
-    getButton.constrainWidth(constant: 80)
-    getButton.constrainHeight(constant: 32)
-    getButton.layer.cornerRadius = 32 / 2
-    getButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
-    getButton.tintColor = UIColor(red:55/255.0, green:107/255.0, blue:194/255.0, alpha:1.0)
+    getButton.constrainWidth(constant: 40)
+    getButton.constrainHeight(constant: 40)
     
     let verticalStackView = VerticalStackView(arrangedSubviews: [
       nameLabel, compamyLabel

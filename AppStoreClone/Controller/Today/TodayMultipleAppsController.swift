@@ -23,7 +23,8 @@ class TodayMultipleAppsController: BaseListController {
   
   let closeButton: UIButton = {
     let button = UIButton(type: .system)
-    button.setImage(#imageLiteral(resourceName: "close").withRenderingMode(.alwaysOriginal), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "arrow-point-to-down"), for: .normal)
+    button.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
     button.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
     return button
   }()
@@ -75,7 +76,8 @@ class TodayMultipleAppsController: BaseListController {
   
   fileprivate func setupCloseButton() {
     view.addSubview(closeButton)
-    closeButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 16, right: 24), size: .init(width: 36, height: 36))
+    closeButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 16, right: 0), size: .init(width: 36, height: 36))
+    closeButton.centerXInSuperview()
   }
   
   
