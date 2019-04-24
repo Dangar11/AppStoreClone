@@ -22,11 +22,13 @@ class AppFullscreenHeaderCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
+    
     addSubview(todayCell)
     todayCell.fillSuperview()
+    todayCell.imageContainerView.layer.cornerRadius = 0
     
     addSubview(closeButton)
-    closeButton.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 36, left: 0, bottom: 0, right: 12), size: .init(width: 38, height: 38))
+    closeButton.anchor(top: safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 12), size: .init(width: 38, height: 38))
   }
   
   required init?(coder aDecoder: NSCoder) {

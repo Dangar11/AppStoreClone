@@ -9,7 +9,7 @@
 import UIKit
 
 
-class TodayCell: UICollectionViewCell {
+class TodayCell: BaseTodayCell {
   
   var todayItem: TodayItem! {
     didSet {
@@ -19,20 +19,28 @@ class TodayCell: UICollectionViewCell {
     
   }
   
-
+  
   let imageView = UIImageView(image: #imageLiteral(resourceName: "men-in-black"))
+  let imageContainerView = UIView()
   
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    backgroundColor = .white
-    layer.cornerRadius = 16
-    clipsToBounds = true
     
-    addSubview(imageView)
     imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
+    layer.cornerRadius = 16
+    backgroundColor = .white
+  
+    imageContainerView.clipsToBounds = true
+    imageContainerView.layer.cornerRadius = 16
+    imageContainerView.addSubview(imageView)
+    
     imageView.fillSuperview()
+    
+    addSubview(imageContainerView)
+    imageContainerView.fillSuperview()
     
   }
   

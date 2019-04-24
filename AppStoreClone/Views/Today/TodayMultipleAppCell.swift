@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodayMultipleAppCell: UICollectionViewCell {
+class TodayMultipleAppCell: BaseTodayCell {
   
   var todayItem: TodayItem! {
     didSet {
