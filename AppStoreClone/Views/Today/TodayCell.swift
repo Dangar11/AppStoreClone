@@ -14,6 +14,7 @@ class TodayCell: UICollectionViewCell {
   var todayItem: TodayItem! {
     didSet {
       imageView.image = todayItem.image
+      
     }
     
   }

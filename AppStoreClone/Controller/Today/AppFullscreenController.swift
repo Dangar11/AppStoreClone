@@ -21,11 +21,17 @@ class AppFullscreenController: UITableViewController {
     tableView.tableFooterView = UIView()
     tableView.separatorStyle = .none
     tableView.allowsSelection = false
+    tableView.contentInsetAdjustmentBehavior = .never
+
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
     tableView.reloadData()
   }
+  
   
  
   //MARK: - Data Source
@@ -47,8 +53,6 @@ class AppFullscreenController: UITableViewController {
       return headerCell
     }
     
-    
-    
     let cell = AppFullscreenCell()
     return cell
   }
@@ -59,7 +63,7 @@ class AppFullscreenController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.row == 0 {
-      return 450
+      return TodayController.cellSize
     }
     return super.tableView(tableView, heightForRowAt: indexPath)
   }

@@ -8,19 +8,25 @@
 
 import UIKit
 
+
+
 class TodayController: BaseListController {
   
   
   //MARK: - Properties
-  fileprivate let cellId = "todayCell"
+//  fileprivate let cellId = "todayCell"
   fileprivate let headerId = "headerId"
+//  fileprivate let multipleCellId = "multipleCellId"
+  
+  static let cellSize: CGFloat = 450
   
   let items = [
-  TodayItem.init(category: "Action", title: "Avangers", image: #imageLiteral(resourceName: "avengers") ),
-  TodayItem.init(category: "Action", title: "John Wick", image: #imageLiteral(resourceName: "wick3")),
-  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "xmen")),
-  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "men-in-black")),
-  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "spider"))
+  TodayItem.init(category: "Action", title: "Avangers", image: #imageLiteral(resourceName: "avengers"), cellType: .single),
+  TodayItem.init(category: "Action", title: "John Wick", image: #imageLiteral(resourceName: "wick3"), cellType: .single),
+  TodayItem.init(category: "Life Hack", title: "It's the best life hack in the world", image: #imageLiteral(resourceName: "star"), cellType: .multiple),
+  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "xmen"), cellType: .single),
+  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "men-in-black"), cellType: .multiple),
+  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "spider"), cellType: .single)
   
   ]
   
@@ -48,8 +54,10 @@ class TodayController: BaseListController {
     format.dateFormat = "EEEE dd MMMM"
     collectionView.backgroundColor = #colorLiteral(red: 0.9234003425, green: 0.9234003425, blue: 0.9234003425, alpha: 1)
     
-    collectionView.register(TodayCell.self, forCellWithReuseIdentifier: cellId)
+    collectionView.register(TodayCell.self, forCellWithReuseIdentifier: TodayItem.CellType.single.rawValue)
+    collectionView.register(TodayMultipleAppCell.self, forCellWithReuseIdentifier: TodayItem.CellType.multiple.rawValue)
     collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+    
   }
   
   
@@ -86,12 +94,22 @@ class TodayController: BaseListController {
   
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TodayCell
-    cell.todayItem = items[indexPath.item]
+   
+    let cellType = items[indexPath.item].cellType.rawValue
+    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType, for: indexPath)
+    
+    if let cell = cell as? TodayCell {
+      cell.todayItem = items[indexPath.item]
+    } else if let cell = cell as? TodayMultipleAppCell {
+      cell.todayItem = items[indexPath.item]
+    }
+    
     return cell
+    
   }
-  
-  
+
+
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
@@ -102,9 +120,15 @@ class TodayController: BaseListController {
       self.handleRemoveFullScreenView()
     }
     
+
+    
     view.addSubview(fullscreenView)
+    
     fullscreenView.layer.opacity = 1
+    
     fullscreenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleRemoveFullScreenView)))
+    
+    self.collectionView.isUserInteractionEnabled = false
     
     //return a spacific cell
     guard let cell = collectionView.cellForItem(at: indexPath) else { return }
@@ -154,7 +178,7 @@ class TodayController: BaseListController {
     
     
     
-    UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: { [unowned self] in
+    UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: { [unowned self] in
       
       //
       guard let fullscreenView = self.appFullscreenController.view else { return }
@@ -168,16 +192,16 @@ class TodayController: BaseListController {
       
       self.view.layoutIfNeeded()
       
-      fullscreenView.layer.cornerRadius = 16
+      fullscreenView.layer.cornerRadius = 24
       self.tabBarController?.tabBar.transform = .identity
       
-      UIView.animate(withDuration: 0.5, delay: 0.15, animations: {
+      UIView.animate(withDuration: 0.3, delay: 0.3, animations: {
         fullscreenView.layer.opacity = 0.0
       })
       
     }, completion: { _ in
       self.appFullscreenController.view.removeFromSuperview()
-      
+      self.collectionView.isUserInteractionEnabled = true
     })
   }
   
@@ -188,7 +212,7 @@ class TodayController: BaseListController {
 extension TodayController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return .init(width: view.frame.width - padding, height: 450)
+    return .init(width: view.frame.width - padding, height: TodayController.cellSize)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
