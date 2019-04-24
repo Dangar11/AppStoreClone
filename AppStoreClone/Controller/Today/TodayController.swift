@@ -14,21 +14,24 @@ class TodayController: BaseListController {
   
   
   //MARK: - Properties
-//  fileprivate let cellId = "todayCell"
+
   fileprivate let headerId = "headerId"
-//  fileprivate let multipleCellId = "multipleCellId"
+  
+  var activityIndicatiorView: UIActivityIndicatorView = {
+    let ai = UIActivityIndicatorView(style: .whiteLarge)
+    ai.color = .darkGray
+    ai.startAnimating()
+    ai.hidesWhenStopped = true
+    return ai
+  }()
+  
+  
+  var topPaidGroup: AppGroup?
+  var gamesGroup: AppGroup?
   
   static let cellSize: CGFloat = 450
   
-  let items = [
-  TodayItem.init(category: "Action", title: "Avangers", image: #imageLiteral(resourceName: "avengers"), cellType: .single),
-  TodayItem.init(category: "Action", title: "John Wick", image: #imageLiteral(resourceName: "wick3"), cellType: .single),
-  TodayItem.init(category: "Life Hack", title: "It's the best life hack in the world", image: #imageLiteral(resourceName: "star"), cellType: .multiple),
-  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "xmen"), cellType: .single),
-  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "men-in-black"), cellType: .multiple),
-  TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "spider"), cellType: .single)
-  
-  ]
+  var items = [TodayItem]()
   
   let padding: CGFloat = 64
   let lineSpacing: CGFloat = 32
@@ -51,6 +54,9 @@ class TodayController: BaseListController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    view.addSubview(activityIndicatiorView)
+    activityIndicatiorView.centerInSuperview()
+    
     format.dateFormat = "EEEE dd MMMM"
     collectionView.backgroundColor = #colorLiteral(red: 0.9234003425, green: 0.9234003425, blue: 0.9234003425, alpha: 1)
     
@@ -58,13 +64,91 @@ class TodayController: BaseListController {
     collectionView.register(TodayMultipleAppCell.self, forCellWithReuseIdentifier: TodayItem.CellType.multiple.rawValue)
     collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     
+    fetchData()
+    
   }
   
   
   override func viewWillAppear(_ animated: Bool) {
     navigationController?.isNavigationBarHidden = true
+    tabBarController?.tabBar.superview?.setNeedsLayout()
   }
   
+  fileprivate func fetchData() {
+    
+    //dispatchGroup
+    
+    let dispatchGroup = DispatchGroup()
+    
+    dispatchGroup.enter()
+    Service.shared.fetchGames { (appGroup, error) in
+      if let error = error {
+        print(error)
+      }
+      
+      self.gamesGroup = appGroup
+      dispatchGroup.leave()
+      
+    }
+    
+    dispatchGroup.enter()
+    Service.shared.fetchTopPaid { (appGroup, error) in
+      if let error = error {
+        print(error)
+      }
+      
+      self.topPaidGroup = appGroup
+      dispatchGroup.leave()
+    }
+    
+    
+    
+    dispatchGroup.notify(queue: .main) {
+      // access to top paid end games
+      print("Finished fetching")
+      self.activityIndicatiorView.stopAnimating()
+      
+      self.items = [
+        TodayItem.init(category: "Daily List", title: self.topPaidGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "star"), cellType: .multiple, apps: self.topPaidGroup?.feed.results ?? []),
+        TodayItem.init(category: "Action", title: "John Wick", image: #imageLiteral(resourceName: "wick3"), cellType: .single, apps: []),
+        TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "xmen"), cellType: .single, apps: []),
+        TodayItem.init(category: "Daily List", title: self.gamesGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "spider"), cellType: .multiple, apps: self.gamesGroup?.feed.results ?? []),
+        TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "spider"), cellType: .single, apps: []),
+        TodayItem.init(category: "Action", title: "Avangers", image: #imageLiteral(resourceName: "avengers"), cellType: .single, apps: [])
+      ]
+  
+      
+      self.collectionView.reloadData()
+    }
+    
+  }
+  
+  //Allow you to tap on the cell
+  @objc func handleMultipleAppsTap(_ gesture: UIGestureRecognizer) {
+    
+    let collectionView = gesture.view
+    
+    //wich cell we clicking in
+    var superview = collectionView?.superview
+    
+    while superview != nil {
+      if let cell = superview as? TodayMultipleAppCell {
+        guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+        
+        let apps = self.items[indexPath.item].apps
+        
+        let fullController = TodayMultipleAppsController(mode: .fullscreen)
+        fullController.apps = apps
+        present(fullController, animated: true)
+        return
+      }
+      
+      superview = superview?.superview
+    }
+    
+  }
+  
+
   
   
   //MARK: - Data Source
@@ -102,6 +186,7 @@ class TodayController: BaseListController {
     if let cell = cell as? TodayCell {
       cell.todayItem = items[indexPath.item]
     } else if let cell = cell as? TodayMultipleAppCell {
+      cell.multipleAppController.collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMultipleAppsTap)))
       cell.todayItem = items[indexPath.item]
     }
     
@@ -120,6 +205,14 @@ class TodayController: BaseListController {
       self.handleRemoveFullScreenView()
     }
     
+    if items[indexPath.item].cellType == .multiple {
+      let fullController = TodayMultipleAppsController(mode: .fullscreen)
+      fullController.apps = self.items[indexPath.item].apps
+      present(BackEnabledNavigationController(rootViewController: fullController), animated: true)
+      
+      return
+      
+    }
 
     
     view.addSubview(fullscreenView)

@@ -32,6 +32,9 @@ class AppFullscreenController: UITableViewController {
     tableView.reloadData()
   }
   
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
   
  
   //MARK: - Data Source

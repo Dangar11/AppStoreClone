@@ -18,6 +18,8 @@ struct TodayItem {
   let image: UIImage
   
   let cellType: CellType
+  
+  let apps: [FeedResult]
 
   enum CellType: String {
     case single, multiple

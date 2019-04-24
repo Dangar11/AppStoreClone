@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Service/ServiceApi.swift"
-            timestampString = "577201954.548588"
+            timestampString = "577791853.73796"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111">
+            startingLineNumber = "98"
+            endingLineNumber = "98">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -72,11 +72,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Service/ServiceApi.swift"
-            timestampString = "577201954.548664"
+            timestampString = "577791853.738055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119">
+            startingLineNumber = "98"
+            endingLineNumber = "98">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppStoreClone/Controller/Today/TodayController.swift"
+            timestampString = "577800128.614031"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppStoreClone/Controller/Today/TodayMultipleAppsController.swift"
+            timestampString = "577800128.614117"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
