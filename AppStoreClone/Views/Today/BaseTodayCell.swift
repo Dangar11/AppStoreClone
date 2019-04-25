@@ -29,7 +29,7 @@ class BaseTodayCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    //This resterize layer for better perfomance issue 
+    //This resterize layer for better perfomance issue
     self.backgroundView = UIView()
     addSubview(self.backgroundView!)
     self.backgroundView?.fillSuperview()
