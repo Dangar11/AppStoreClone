@@ -115,12 +115,12 @@ class TodayController: BaseListController {
       self.activityIndicatiorView.stopAnimating()
       
       self.items = [
-        TodayItem.init(category: "Daily List", title: self.topPaidGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "star"), cellType: .multiple, apps: self.topPaidGroup?.feed.results ?? []),
-        TodayItem.init(category: "Action", title: "John Wick", image: #imageLiteral(resourceName: "wick3"), cellType: .single, apps: []),
-        TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "xmen"), cellType: .single, apps: []),
-        TodayItem.init(category: "Daily List", title: self.gamesGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "spider"), cellType: .multiple, apps: self.gamesGroup?.feed.results ?? []),
-        TodayItem.init(category: "Action", title: "2", image: #imageLiteral(resourceName: "spider"), cellType: .single, apps: []),
-        TodayItem.init(category: "Action", title: "Avangers", image: #imageLiteral(resourceName: "avengers"), cellType: .single, apps: [])
+        TodayItem.init(releaseDate: "Daily List", title: self.topPaidGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "star"), cellType: .multiple, apps: self.topPaidGroup?.feed.results ?? []),
+        TodayItem.init(releaseDate: "May 17", title: "John Wick 3", image: #imageLiteral(resourceName: "wick3"), cellType: .single, apps: []),
+        TodayItem.init(releaseDate: "June 6", title: "X-Men: Dark Phoenix", image: #imageLiteral(resourceName: "xmen"), cellType: .single, apps: []),
+        TodayItem.init(releaseDate: "Daily List", title: self.gamesGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "spider"), cellType: .multiple, apps: self.gamesGroup?.feed.results ?? []),
+        TodayItem.init(releaseDate: "July 5", title: "Spider-Man: Far From Home", image: #imageLiteral(resourceName: "spider"), cellType: .single, apps: []),
+        TodayItem.init(releaseDate: "April 24", title: "AVENGERS: ENDGAME", image: #imageLiteral(resourceName: "avengers"), cellType: .single, apps: [])
       ]
   
       
@@ -347,7 +347,6 @@ class TodayController: BaseListController {
   self.trailingAnchor?.constant = 0
   self.bottomAnchor?.constant = 0
   
-  
   self.view.layoutIfNeeded()
   
   view.layer.cornerRadius = 0
@@ -374,12 +373,13 @@ class TodayController: BaseListController {
       self.trailingAnchor?.constant = -startingFrame.origin.x
       self.bottomAnchor?.constant = startingFrame.origin.y
       
-      self.view.layoutIfNeeded()
+     
     
       self.appFullscreenController.closeButton.alpha = 0
       
       fullscreenView.layer.cornerRadius = 24
       self.tabBarController?.tabBar.transform = .identity
+       self.view.layoutIfNeeded()
       
       
     }, completion: { _ in

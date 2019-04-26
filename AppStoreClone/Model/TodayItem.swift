@@ -13,7 +13,7 @@ import UIKit
 
 struct TodayItem {
   
-  let category: String
+  let releaseDate: String
   let title: String
   let image: UIImage
   

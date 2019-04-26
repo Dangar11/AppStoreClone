@@ -12,7 +12,7 @@ class TodayMultipleAppCell: BaseTodayCell {
   
   var todayItem: TodayItem! {
     didSet {
-      categoryLabel.text = todayItem.category
+      categoryLabel.text = todayItem.releaseDate
       titleLabel.text = todayItem.title
       
       multipleAppController.apps = todayItem.apps

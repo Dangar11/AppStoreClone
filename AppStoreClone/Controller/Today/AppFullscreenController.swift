@@ -20,6 +20,8 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
     return button
   }()
   
+  let floatingContainerView = UIView()
+  
   let tableView = UITableView(frame: .zero, style: .plain)
   
   //MARK: - Lifecycle
@@ -39,7 +41,6 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
     tableView.contentInsetAdjustmentBehavior = .never
     
     setupCloseButton()
-
     
   }
   
@@ -54,10 +55,25 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
   }
   
    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    print(scrollView.contentOffset.y)
     if scrollView.contentOffset.y < 0 {
+      view.layer.cornerRadius = 25
       scrollView.isScrollEnabled = false
       scrollView.isScrollEnabled = true
     }
+    
+    //If scroll down higher then 100 point then show animation with the view, scroll up less then 100 hide view with animation
+    if scrollView.contentOffset.y > 100 {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
+          let translationY = -90 - UIApplication.shared.statusBarFrame.height
+          self.floatingContainerView.transform = .init(translationX: 0, y: translationY)
+        })
+    } else {
+      UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
+        self.floatingContainerView.transform = .init(translationX: 0, y: 90)
+      })
+    }
+    
   }
   
   fileprivate func setupCloseButton() {
@@ -67,6 +83,66 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
   
   }
   
+  // We populate todayItem in the cell section instead of using this in viewDidLoad were todayItem = nil
+  fileprivate func setupFloatingControls() {
+    
+    floatingContainerView.layer.cornerRadius = 16
+    floatingContainerView.clipsToBounds = true
+    view.addSubview(floatingContainerView)
+    
+    let bottomPadding = UIApplication.shared.statusBarFrame.height
+    
+    floatingContainerView.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 16, bottom: -90, right: 16), size: .init(width: 0, height: 90))
+    
+    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    floatingContainerView.addSubview(blurView)
+    blurView.fillSuperview()
+    
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+    
+    // add our subviews
+    let imageView = UIImageView(cornerRadius: 16)
+    imageView.image = todayItem?.image
+    imageView.constrainHeight(constant: 68)
+    imageView.constrainWidth(constant: 68)
+    
+    let getButton = UIButton(title: "Watch")
+    getButton.setTitleColor(.white, for: .normal)
+    getButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+    getButton.backgroundColor = .lightGray
+    getButton.layer.cornerRadius = 16
+    getButton.constrainWidth(constant: 80)
+    getButton.constrainHeight(constant: 32)
+    
+    let topLabel = UILabel(text: todayItem?.title ?? "", font: .boldSystemFont(ofSize: 20))
+    topLabel.textColor = .white
+    topLabel.numberOfLines = 0
+    let bottomLabel = UILabel(text: todayItem?.releaseDate ?? "", font: .systemFont(ofSize: 16, weight: .regular))
+    bottomLabel.textColor = .white
+   
+   
+    
+    let verticalStack = VerticalStackView(arrangedSubviews: [topLabel, bottomLabel], spacing: 4)
+    
+    let stackView = UIStackView(arrangedSubviews: [
+      imageView,
+      verticalStack,
+      getButton
+      ])
+    stackView.spacing = 16
+    
+    floatingContainerView.addSubview(stackView)
+    stackView.fillSuperview(padding: .init(top: 0, left: 16, bottom: 0, right: 16))
+    stackView.alignment = .center
+  }
+  
+  
+  @objc fileprivate func handleTap() {
+    UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
+      
+      self.floatingContainerView.transform = .init(translationX: 0, y: -90)
+    })
+  }
  
   //MARK: - Data Source
 
@@ -84,6 +160,8 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
       headerCell.todayCell.todayItem = todayItem
       headerCell.todayCell.layer.cornerRadius = 0
       headerCell.todayCell.backgroundView = nil
+      
+       setupFloatingControls()
       
       return headerCell
     }
