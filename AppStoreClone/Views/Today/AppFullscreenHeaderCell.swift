@@ -13,11 +13,7 @@ class AppFullscreenHeaderCell: UITableViewCell {
   
   let todayCell = TodayCell()
   
-  let closeButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setImage(#imageLiteral(resourceName: "close").withRenderingMode(.alwaysOriginal), for: .normal)
-    return button
-  }()
+
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,8 +23,8 @@ class AppFullscreenHeaderCell: UITableViewCell {
     todayCell.fillSuperview()
     todayCell.imageContainerView.layer.cornerRadius = 0
     
-    addSubview(closeButton)
-    closeButton.anchor(top: safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 12), size: .init(width: 38, height: 38))
+//    addSubview(closeButton)
+//    closeButton.anchor(top: safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 12), size: .init(width: 38, height: 38))
   }
   
   required init?(coder aDecoder: NSCoder) {

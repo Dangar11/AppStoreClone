@@ -86,7 +86,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Controller/Today/TodayController.swift"
-            timestampString = "577901711.9870991"
+            timestampString = "577966877.511722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
@@ -102,12 +102,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppStoreClone/Controller/Today/TodayMultipleAppsController.swift"
-            timestampString = "577808598.9558049"
+            timestampString = "577966877.511791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
             endingLineNumber = "104"
             landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppStoreClone/Controller/Today/AppFullscreenController.swift"
+            timestampString = "577966877.511887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "setupCloseButton()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

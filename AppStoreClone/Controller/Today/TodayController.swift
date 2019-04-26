@@ -311,6 +311,8 @@ class TodayController: BaseListController {
     
     fullscreenView.layer.opacity = 1
     
+    self.appFullscreenController.closeButton.alpha = 1
+    
     fullscreenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleRemoveFullScreenView)))
     
     self.collectionView.isUserInteractionEnabled = false
@@ -373,9 +375,8 @@ class TodayController: BaseListController {
       self.bottomAnchor?.constant = startingFrame.origin.y
       
       self.view.layoutIfNeeded()
-      
-      guard let cell = self.appFullscreenController.tableView.cellForRow(at: [0,0]) as? AppFullscreenHeaderCell else { return }
-      cell.closeButton.alpha = 0
+    
+      self.appFullscreenController.closeButton.alpha = 0
       
       fullscreenView.layer.cornerRadius = 24
       self.tabBarController?.tabBar.transform = .identity
