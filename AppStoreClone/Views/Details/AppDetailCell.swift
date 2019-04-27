@@ -41,7 +41,7 @@ class AppDetailCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    appIconImageView.backgroundColor = .red
+    appIconImageView.backgroundColor = .white
     appIconImageView.constrainWidth(constant: 140)
     appIconImageView.constrainHeight(constant: 140)
     priceButton.backgroundColor = UIColor(red:55/255.0, green:107/255.0, blue:194/255.0, alpha:1.0)

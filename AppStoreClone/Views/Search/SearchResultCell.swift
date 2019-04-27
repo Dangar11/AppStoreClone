@@ -22,15 +22,15 @@ class SearchResultCell: UICollectionViewCell {
       appIconImageView.sd_setImage(with: url)
       
       screenshot1ImageView.sd_setImage(with:
-        URL(string: appResult.screenshotUrls[0]))
-      if appResult.screenshotUrls.count > 1 {
+        URL(string: appResult.screenshotUrls![0]))
+      if appResult.screenshotUrls!.count > 1 {
         screenshot2ImageView.sd_setImage(with:
-          URL(string: appResult.screenshotUrls[1]))
+          URL(string: appResult.screenshotUrls![1]))
       }
       
-      if appResult.screenshotUrls.count > 2 {
+      if appResult.screenshotUrls!.count > 2 {
         screenshot3ImageView.sd_setImage(with:
-          URL(string: appResult.screenshotUrls[2]))
+          URL(string: appResult.screenshotUrls![2]))
       }
     }
   }
@@ -65,14 +65,10 @@ class SearchResultCell: UICollectionViewCell {
   
   
   
-  let getButton: UIButton = {
+  let getButton : UIButton = {
     let btn = UIButton(type: .system)
-    btn.setTitle("GET", for: .normal)
-    btn.setTitleColor(.blue, for: .normal)
-    btn.titleLabel?.font = .boldSystemFont(ofSize: 14)
-    btn.backgroundColor = .lightGray
-    btn.layer.cornerRadius = 12
-    btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+    btn.setImage(#imageLiteral(resourceName: "download"), for: .normal)
+    btn.tintColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
     return btn
   }()
   
@@ -95,7 +91,8 @@ class SearchResultCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    
+    getButton.constrainWidth(constant: 40)
+    getButton.constrainHeight(constant: 40)
     
     // optional
     

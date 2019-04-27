@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+//Implements return back like the additional UINavBar swipe back one page
 class BackEnabledNavigationController: UINavigationController, UIGestureRecognizerDelegate {
   
   override func viewDidAppear(_ animated: Bool) {

@@ -15,6 +15,13 @@ class SearchController: BaseListController {
 
   //MARK: - Properties
   
+  var activityIndicatiorView: UIActivityIndicatorView = {
+    let ai = UIActivityIndicatorView(style: .whiteLarge)
+    ai.color = .darkGray
+    ai.hidesWhenStopped = true
+    return ai
+  }()
+  
   fileprivate let cellId = "searchCell"
   fileprivate let searchController = UISearchController(searchResultsController: nil)
   
@@ -35,6 +42,9 @@ class SearchController: BaseListController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    view.addSubview(activityIndicatiorView)
+    activityIndicatiorView.centerInSuperview()
     
     collectionView.backgroundColor = .white
     collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
@@ -73,6 +83,7 @@ class SearchController: BaseListController {
   
 
   fileprivate func fetchItunesApps()  {
+    
     
     Service.shared.fetchApps(searchTerm: "") { [unowned self] results, error  in
       if let error = error {
@@ -139,12 +150,15 @@ extension SearchController: UISearchBarDelegate {
       animateSearchLabel(opacity: 0)
     }
     
+    activityIndicatiorView.startAnimating()
     
+    let dispatchGroup = DispatchGroup()
     
     timer?.invalidate()
     
     timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
       
+      dispatchGroup.enter()
       //fire the search
       Service.shared.fetchApps(searchTerm: searchText) { (result, error) in
         
@@ -154,12 +168,16 @@ extension SearchController: UISearchBarDelegate {
         }
         
         self.appResults = result?.results ?? []
-        DispatchQueue.main.async {
-          self.collectionView.reloadData()
-        }
+        dispatchGroup.leave()
+      }
+      
+      dispatchGroup.notify(queue: .main) {
+        self.activityIndicatiorView.stopAnimating()
+        self.collectionView.reloadData()
       }
       
     })
+    
     
     
     

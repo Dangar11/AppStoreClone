@@ -57,7 +57,6 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
    func scrollViewDidScroll(_ scrollView: UIScrollView) {
     print(scrollView.contentOffset.y)
     if scrollView.contentOffset.y < 0 {
-      view.layer.cornerRadius = 25
       scrollView.isScrollEnabled = false
       scrollView.isScrollEnabled = true
     }
@@ -67,6 +66,7 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
           let translationY = -90 - UIApplication.shared.statusBarFrame.height
           self.floatingContainerView.transform = .init(translationX: 0, y: translationY)
+//          self.view.layer.cornerRadius = 25
         })
     } else {
       UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
@@ -90,15 +90,11 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
     floatingContainerView.clipsToBounds = true
     view.addSubview(floatingContainerView)
     
-    let bottomPadding = UIApplication.shared.statusBarFrame.height
-    
     floatingContainerView.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 16, bottom: -90, right: 16), size: .init(width: 0, height: 90))
     
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     floatingContainerView.addSubview(blurView)
     blurView.fillSuperview()
-    
-    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     
     // add our subviews
     let imageView = UIImageView(cornerRadius: 16)
@@ -136,13 +132,6 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
     stackView.alignment = .center
   }
   
-  
-  @objc fileprivate func handleTap() {
-    UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
-      
-      self.floatingContainerView.transform = .init(translationX: 0, y: -90)
-    })
-  }
  
   //MARK: - Data Source
 

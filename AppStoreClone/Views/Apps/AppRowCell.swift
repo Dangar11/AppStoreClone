@@ -46,7 +46,7 @@ class AppRowCell: UICollectionViewCell {
     super.init(frame: frame)
     
     
-    imageView.backgroundColor = .purple
+    imageView.backgroundColor = .white
     imageView.constrainWidth(constant: 64)
     imageView.constrainHeight(constant: 64)
     

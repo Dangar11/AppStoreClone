@@ -17,6 +17,16 @@ class AppsDetailsController: BaseListController {
   
   fileprivate let appId: String
   
+  
+  var activityIndicatiorView: UIActivityIndicatorView = {
+    let ai = UIActivityIndicatorView(style: .whiteLarge)
+    ai.color = .darkGray
+    ai.startAnimating()
+    ai.hidesWhenStopped = true
+    return ai
+  }()
+  
+  
   //dependency injection constructor
   init(appId: String) {
     self.appId = appId
@@ -36,6 +46,9 @@ class AppsDetailsController: BaseListController {
     
     collectionView.backgroundColor = .white
     
+    view.addSubview(activityIndicatiorView)
+    activityIndicatiorView.centerInSuperview()
+    
     collectionView.register(AppDetailCell.self, forCellWithReuseIdentifier: cellId)
     collectionView.register(PreviewCell.self, forCellWithReuseIdentifier: previewCellId)
     collectionView.register(ReviewRowCell.self, forCellWithReuseIdentifier: reviewCellId)
@@ -47,31 +60,41 @@ class AppsDetailsController: BaseListController {
   
   
   fileprivate func fetchData() {
+    
+    let dispatchGroup = DispatchGroup()
+    
+    
+    dispatchGroup.enter()
     let urlString = "https://itunes.apple.com/lookup?id=\(appId)"
     Service.shared.fetchGenericJSONData(urlString: urlString) { (result: SearchResult?, error) in
       let app = result?.results.first
       self.app = app
-      DispatchQueue.main.async {
-        self.collectionView.reloadData()
-      }
+      dispatchGroup.leave()
+      
     }
     
     let reviewsUrl = "https://itunes.apple.com/rss/customerreviews/page=1/id=\(appId)/sortby=mostrecent/json?l=en&cc=us"
     
+    dispatchGroup.enter()
     Service.shared.fetchGenericJSONData(urlString: reviewsUrl) { (reviews: Reviews?, error) in
-      
       if let error = error {
         print(error)
       }
       
       self.reviews = reviews
-      
-      DispatchQueue.main.async {
-        self.collectionView.reloadData()
-      }
-      
+      dispatchGroup.leave()
       
     }
+    
+    
+    dispatchGroup.notify(queue: .main) {
+      print("Finished fetching")
+      self.activityIndicatiorView.stopAnimating()
+      
+      self.collectionView.reloadData()
+    }
+    
+    
   }
   
   

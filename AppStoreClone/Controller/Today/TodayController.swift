@@ -278,6 +278,10 @@ class TodayController: BaseListController {
         scale = min(1, scale)
         scale = max(0.6, scale)
         
+        if scale < 1 {
+          appFullscreenController.view.layer.cornerRadius = 25
+        }
+        
         let transform: CGAffineTransform = .init(scaleX: scale, y: scale)
         self.appFullscreenController.view.transform = transform
       }
