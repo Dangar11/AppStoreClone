@@ -1,8 +1,6 @@
 # AppStoreClone
 The clone app of AppStore creating only in code 
 
-# Tinder_Clone
-Clone of Tinder App
 
 It's a clone AppStore app with all data fetching from AppStore API with custom animation all done in CODE💻without Storyboards
 
