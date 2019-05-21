@@ -1,24 +1,15 @@
 # AppStoreClone
-The clone app of AppStore creating only in code 
+AppStore app build in code💻 without Storyboards -> **MVC-N Pattern** 
+
+Data fetching from itunes and RSS itunes.
+Most of the screens build on UICollectionView and UICollectionViewFlowLayout for sizing!
 
 
-It's a clone AppStore app with all data fetching from AppStore API with custom animation all done in CODE💻without Storyboards
-
--UICollectionView 
-
--JSON with URLSession
-
--REST
-
--SD_web for image loading with some caching
-
--UITableView
-
--GENERICS for network call  
-
--CLOSURES 
-
-
-FULL VIDEO CLICK⬇︎
-
-[![asciicast](https://i.imgur.com/pWjXBhc.jpg)](https://youtu.be/bxdU55x6y4g)
+## 1-st Screen
+![](https://media.giphy.com/media/h8yah3wNtUE4QV1vlv/giphy.gif)
+## 2-d Screen
+![](https://media.giphy.com/media/XGUmdYRuUoksxfF4h6/giphy.gif)
+## 3-rd Screen
+![](https://media.giphy.com/media/U1UtW29M1XxvOQoK4R/giphy.gif)
+## 4-th Screen
+![](https://media.giphy.com/media/ZEkLRQ2uVhyLtLCVf3/giphy.gif)
