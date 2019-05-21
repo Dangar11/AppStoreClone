@@ -1,9 +1,22 @@
 # AppStoreClone
 AppStore app build in code💻 without Storyboards -> **MVC-N Pattern** 
 
-Data fetching from itunes and RSS itunes.
-Most of the screens build on UICollectionView and UICollectionViewFlowLayout for sizing!
+## Skills in this app 
 
+* Nested UICollectionViews
+* Animation using Auto Layout constraints
+* Animating Child View Controller objects
+* Modeling using JSON Decodable protocol
+* JSON Custom Coding Keys
+* Asynchronous Data Fetching
+* DispatchGroup Fetch Synchronization
+* SDWebImage Caching
+* Snapping Collection Flow Layout
+* Generics Code Reduction and Reusability
+* Pagination Data Fetching
+* Dependency Injection
+* UIVisualEffectView & UIBlurEffect
+* Floating Controls
 
 ## 1-st Screen
 ![](https://media.giphy.com/media/h8yah3wNtUE4QV1vlv/giphy.gif)
