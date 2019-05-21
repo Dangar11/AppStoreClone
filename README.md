@@ -16,7 +16,7 @@ AppStore app build in code💻 without Storyboards -> **MVC-N Pattern**
 * Pagination Data Fetching
 * Dependency Injection
 * UIVisualEffectView & UIBlurEffect
-* Floating Controls
+* Floating Control
 
 ## 1-st Screen
 ![](https://media.giphy.com/media/h8yah3wNtUE4QV1vlv/giphy.gif)
