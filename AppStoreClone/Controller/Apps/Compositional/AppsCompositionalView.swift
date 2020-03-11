@@ -8,13 +8,30 @@
 
 import SwiftUI
 
+
+class CompositionalHeader: UICollectionReusableView {
+  
+  let label = UILabel(text: "Editor's Games", font: .boldSystemFont(ofSize: 32))
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    addSubview(label)
+    label.fillSuperview()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+
 class CompositionalController: UICollectionViewController {
   
   //MARK: - Properties
   
   let topCellId = "topCellId"
   let centerCellid = "centerCellId"
-
+  let headerId = "headerId"
   
   
   //MARK: - VC LifeCycle
@@ -23,8 +40,9 @@ class CompositionalController: UICollectionViewController {
     collectionView.backgroundColor = .systemBackground
     navigationItem.title = "Apps"
     navigationController?.navigationBar.prefersLargeTitles = true
+    collectionView.register(CompositionalHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: topCellId)
-    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: centerCellid)
+    collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: centerCellid)
   }
   
   
@@ -40,23 +58,25 @@ class CompositionalController: UICollectionViewController {
       case 1:
         return CompositionalController.secondSection()
         
-      default: return NSCollectionLayoutSection(group: NSCollectionLayoutGroup(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))))
+      default:
+        return CompositionalController.secondSection()
       }
       
       
     }
     
-    
-    
-    
     super.init(collectionViewLayout: layout)
   }
+  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   
+  
+  
+  //MARK: - Helper Methods
   static func firstSection() -> NSCollectionLayoutSection {
     let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
     item.contentInsets.bottom = 16
@@ -83,19 +103,30 @@ class CompositionalController: UICollectionViewController {
     let section = NSCollectionLayoutSection(group: group)
     section.orthogonalScrollingBehavior = .groupPaging
     section.contentInsets.leading = 16
+    //MARK: HEADER RENDER
+    let kind = UICollectionView.elementKindSectionHeader
+    section.boundarySupplementaryItems = [
+      .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: kind, alignment: .topLeading)]
+    
     return section
   }
-  
-  
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 2
-  }
-  
+
   
   //MARK: - UICollectionView methods
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 8
   }
+  
+  
+  
+  override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 4
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+  }
+  
   
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -106,7 +137,6 @@ class CompositionalController: UICollectionViewController {
       return cell
     default:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: centerCellid, for: indexPath)
-      cell.backgroundColor = .blue
       return cell
     }
     
