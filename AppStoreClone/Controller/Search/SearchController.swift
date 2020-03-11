@@ -16,7 +16,7 @@ class SearchController: BaseListController {
   //MARK: - Properties
   
   var activityIndicatiorView: UIActivityIndicatorView = {
-    let ai = UIActivityIndicatorView(style: .whiteLarge)
+    let ai = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     ai.color = .darkGray
     ai.hidesWhenStopped = true
     return ai
@@ -69,7 +69,6 @@ class SearchController: BaseListController {
     definesPresentationContext = true
     navigationItem.searchController = self.searchController
     navigationItem.hidesSearchBarWhenScrolling = false
-    searchController.dimsBackgroundDuringPresentation = false
     searchController.searchBar.delegate = self
   }
   

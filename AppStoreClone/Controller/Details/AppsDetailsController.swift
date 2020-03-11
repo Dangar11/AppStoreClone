@@ -19,7 +19,7 @@ class AppsDetailsController: BaseListController {
   
   
   var activityIndicatiorView: UIActivityIndicatorView = {
-    let ai = UIActivityIndicatorView(style: .whiteLarge)
+    let ai = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     ai.color = .darkGray
     ai.startAnimating()
     ai.hidesWhenStopped = true

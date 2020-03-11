@@ -15,6 +15,7 @@
 		DD0563E02263DC9B00E0457B /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563DF2263DC9B00E0457B /* VerticalStackView.swift */; };
 		DD0563E3226481F200E0457B /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563E2226481F200E0457B /* SearchResult.swift */; };
 		DD0563E6226488A600E0457B /* ServiceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0563E5226488A600E0457B /* ServiceApi.swift */; };
+		DD1259C92419602C0029EFA0 /* AppsCompositionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1259C82419602C0029EFA0 /* AppsCompositionalView.swift */; };
 		DD75C76A2268CCAF000372E4 /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75C7692268CCAF000372E4 /* PreviewCell.swift */; };
 		DD75C76C2268CE88000372E4 /* PreviewScreenshotsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75C76B2268CE88000372E4 /* PreviewScreenshotsController.swift */; };
 		DD75C76E2268CFA1000372E4 /* ScreenshotsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75C76D2268CFA1000372E4 /* ScreenshotsCell.swift */; };
@@ -68,6 +69,7 @@
 		DD0563DF2263DC9B00E0457B /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		DD0563E2226481F200E0457B /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		DD0563E5226488A600E0457B /* ServiceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceApi.swift; sourceTree = "<group>"; };
+		DD1259C82419602C0029EFA0 /* AppsCompositionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsCompositionalView.swift; sourceTree = "<group>"; };
 		DD75C7692268CCAF000372E4 /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
 		DD75C76B2268CE88000372E4 /* PreviewScreenshotsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewScreenshotsController.swift; sourceTree = "<group>"; };
 		DD75C76D2268CFA1000372E4 /* ScreenshotsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotsCell.swift; sourceTree = "<group>"; };
@@ -205,9 +207,18 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		DD1259C7241960000029EFA0 /* Compositional */ = {
+			isa = PBXGroup;
+			children = (
+				DD1259C82419602C0029EFA0 /* AppsCompositionalView.swift */,
+			);
+			path = Compositional;
+			sourceTree = "<group>";
+		};
 		DD8F105A2264C0980030E007 /* Apps */ = {
 			isa = PBXGroup;
 			children = (
+				DD1259C7241960000029EFA0 /* Compositional */,
 				DD8F105B2264C0AA0030E007 /* AppsPageController.swift */,
 				DD8F10642264C6670030E007 /* AppsHorizontalController.swift */,
 				DDED7F6D2265051A002043EF /* AppsHeaderHorizontalController.swift */,
@@ -458,6 +469,7 @@
 				DDA8C8AE226F693400578C12 /* TodayItem.swift in Sources */,
 				DD8F105E2264C1F30030E007 /* BaseListController.swift in Sources */,
 				DD969941226348E400C26C69 /* AppDelegate.swift in Sources */,
+				DD1259C92419602C0029EFA0 /* AppsCompositionalView.swift in Sources */,
 				DD8F10622264C3D60030E007 /* AppsGroupCell.swift in Sources */,
 				DDA8C8C2227357C900578C12 /* MusicLoadingFooter.swift in Sources */,
 				DDA8C8AA226F22E900578C12 /* AppFullscreenController.swift in Sources */,
@@ -647,6 +659,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6D6XU3X587;
 				INFOPLIST_FILE = AppStoreClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -666,6 +679,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6D6XU3X587;
 				INFOPLIST_FILE = AppStoreClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -64,7 +64,8 @@ class AppFullscreenController: UIViewController, UITableViewDataSource, UITableV
     //If scroll down higher then 100 point then show animation with the view, scroll up less then 100 hide view with animation
     if scrollView.contentOffset.y > 100 {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
-          let translationY = -90 - UIApplication.shared.statusBarFrame.height
+          let height = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+          let translationY = -90 - height
           self.floatingContainerView.transform = .init(translationX: 0, y: translationY)
 //          self.view.layer.cornerRadius = 25
         })

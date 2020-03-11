@@ -51,8 +51,8 @@ class AppDetailCell: UICollectionViewCell {
     priceButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
     priceButton.setTitleColor(.white, for: .normal)
     
-    separatorLine.widthAnchor.constraint(equalToConstant: frame.width)
-    separatorLine.heightAnchor.constraint(equalToConstant: 1.0)
+    separatorLine.widthAnchor.constraint(equalToConstant: frame.width).isActive = true
+    separatorLine.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
     
     //To cut the button size
     let buttonStackView = UIStackView(arrangedSubviews: [priceButton, UIView()])

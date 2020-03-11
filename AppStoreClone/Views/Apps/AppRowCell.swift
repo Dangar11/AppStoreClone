@@ -50,11 +50,9 @@ class AppRowCell: UICollectionViewCell {
     imageView.constrainWidth(constant: 64)
     imageView.constrainHeight(constant: 64)
     
-    separatorLine.widthAnchor.constraint(equalToConstant: frame.width)
-    separatorLine.heightAnchor.constraint(equalToConstant: 1.0)
+    separatorLine.widthAnchor.constraint(equalToConstant: frame.width).isActive = true
+    separatorLine.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
     
-    separatorLineForBottom.widthAnchor.constraint(equalToConstant: frame.width)
-    separatorLineForBottom.heightAnchor.constraint(equalToConstant: 1.0)
     separatorLineForBottom.isHidden = true
     
     getButton.constrainWidth(constant: 40)

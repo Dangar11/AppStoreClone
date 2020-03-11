@@ -55,8 +55,8 @@ class MultipleAppCell: UICollectionViewCell {
     imageView.constrainWidth(constant: 64)
     imageView.constrainHeight(constant: 64)
     
-    separatorLineForBottom.widthAnchor.constraint(equalToConstant: frame.width)
-    separatorLineForBottom.heightAnchor.constraint(equalToConstant: 1.0)
+    separatorLineForBottom.widthAnchor.constraint(equalToConstant: frame.width).isActive = true
+    separatorLineForBottom.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
     separatorLineForBottom.isHidden = true
     
 
