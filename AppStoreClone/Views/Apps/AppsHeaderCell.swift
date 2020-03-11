@@ -22,6 +22,7 @@ class AppsHeaderCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
+    imageView.image = #imageLiteral(resourceName: "spider")
     companyLabel.textColor = UIColor(red:55/255.0, green:107/255.0, blue:194/255.0, alpha:1.0)
     titleLabel.numberOfLines = 0
     
