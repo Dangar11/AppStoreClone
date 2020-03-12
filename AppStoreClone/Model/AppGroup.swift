@@ -21,7 +21,7 @@ struct Feed: Decodable {
 }
 
 
-struct FeedResult: Decodable {
+struct FeedResult: Decodable, Hashable {
   let id: String
   let artistName: String
   let name: String
