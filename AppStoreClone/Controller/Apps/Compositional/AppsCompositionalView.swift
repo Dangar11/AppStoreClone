@@ -77,6 +77,7 @@ class CompositionalController: UICollectionViewController {
     collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: centerCellid)
     
     navigationItem.rightBarButtonItem = .init(title: "Fetch Top Paid", style: .plain, target: self, action: #selector(handleFetchTopPaid))
+    navigationItem.rightBarButtonItem?.tintColor = UIColor.label
     
     collectionView.refreshControl = UIRefreshControl()
     collectionView.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
@@ -392,5 +393,6 @@ struct AppsCompositionalView_Previews: PreviewProvider {
     static var previews: some View {
         AppsView()
           .edgesIgnoringSafeArea(.all)
+          .colorScheme(.dark)
     }
 }
