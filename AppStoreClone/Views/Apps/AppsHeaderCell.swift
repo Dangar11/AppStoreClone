@@ -12,6 +12,16 @@ import UIKit
 
 class AppsHeaderCell: UICollectionViewCell {
   
+  
+  var app: ResultHeader! {
+    didSet {
+      companyLabel.text = app.artistName
+      titleLabel.text = app.description
+      imageView.sd_setImage(with: URL(string: app.artworkUrl512))
+    }
+  }
+  
+  
   let companyLabel = UILabel(text: "Facebook", font: .boldSystemFont(ofSize: 12))
   let titleLabel = UILabel(text: "Keeping up with friends is faster than ever", font: .systemFont(ofSize: 24))
   

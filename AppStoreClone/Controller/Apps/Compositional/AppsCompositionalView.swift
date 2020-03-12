@@ -24,6 +24,13 @@ class CompositionalHeader: UICollectionReusableView {
   }
 }
 
+enum AppSection {
+  case topSocial
+  case games
+  case topGrossingApps
+  case topPaid
+}
+
 
 class CompositionalController: UICollectionViewController {
   
@@ -33,6 +40,15 @@ class CompositionalController: UICollectionViewController {
   var games: AppGroup?
   var topGrossingApps: AppGroup?
   var topPaid: AppGroup?
+  
+  
+  lazy var diffableDataSource: UICollectionViewDiffableDataSource<AppSection, ResultHeader> = .init(collectionView: self.collectionView) { [ weak self] (collectionView, indexPath, socialApp) -> UICollectionViewCell? in
+    guard let self = self else { return nil}
+    
+    let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: self.topCellId, for: indexPath) as! AppsHeaderCell
+    cell.app = socialApp
+    return cell
+  }
   
   
   let topCellId = "topCellId"
@@ -50,7 +66,8 @@ class CompositionalController: UICollectionViewController {
     collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: topCellId)
     collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: centerCellid)
     
-    fetchAppsDispatchGroup()
+//    fetchAppsDispatchGroup()
+    setupDiffableDatasourse()
   }
   
   
@@ -119,89 +136,111 @@ class CompositionalController: UICollectionViewController {
     return section
   }
   
+  
+  private func setupDiffableDatasourse() {
+    
+    //data to diffableDataSource
+    
+    var snapshot = diffableDataSource.snapshot()
+    
+    
+    collectionView.dataSource = diffableDataSource
+    
+    Service.shared.fetchSocialApps { (socialApps, error) in
+      if let error = error {
+        print("Failed to fetch SocialApps " + error.localizedDescription)
+      }
+      
+      snapshot.appendSections([.topSocial])
+      snapshot.appendItems(socialApps?.results ?? [], toSection: .topSocial)
+      self.diffableDataSource.apply(snapshot)
+      
+    }
+  }
+  
 
 
   
   //MARK: - UICollectionView methods
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    switch section {
-    case 0: return socialApps.count
-    case 1: return games?.feed.results.count ?? 0
-    case 2: return topGrossingApps?.feed.results.count ?? 0
-    case 3: return topPaid?.feed.results.count ?? 0
-    default: return 0
-    }
-    
-  }
+//  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//    switch section {
+//    case 0: return socialApps.count
+//    case 1: return games?.feed.results.count ?? 0
+//    case 2: return topGrossingApps?.feed.results.count ?? 0
+//    case 3: return topPaid?.feed.results.count ?? 0
+//    default: return 0
+//    }
+//
+//  }
   
   
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 4
+    return 0
   }
   
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! CompositionalHeader
     var title: String?
-    
+
     switch indexPath.section {
     case 1: title = games?.feed.title
     case 2: title = topGrossingApps?.feed.title
     case 3: title = topPaid?.feed.title
     default: title = "Apps"
     }
-    
+
     header.label.text = title
     return header
-    
+
   }
   
   
   
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    switch indexPath.section {
-    case 0:
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topCellId, for: indexPath) as! AppsHeaderCell
-      let socialApp = self.socialApps[indexPath.item]
-      cell.companyLabel.text = socialApp.artistName
-      cell.titleLabel.text = socialApp.description
-      cell.imageView.sd_setImage(with: URL(string: socialApp.artworkUrl512))
-      return cell
-    default:
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: centerCellid, for: indexPath) as! AppRowCell
-      var appGroup: AppGroup?
-      switch indexPath.section {
-      case 1: appGroup = games
-      case 2: appGroup = topGrossingApps
-      case 3: appGroup = topPaid
-      default: appGroup = topPaid
-      }
-      cell.app = appGroup?.feed.results[indexPath.item]
-      return cell
-    }
-    
-  }
+//  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//
+//    switch indexPath.section {
+//    case 0:
+//      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topCellId, for: indexPath) as! AppsHeaderCell
+//      let socialApp = self.socialApps[indexPath.item]
+//      cell.companyLabel.text = socialApp.artistName
+//      cell.titleLabel.text = socialApp.description
+//      cell.imageView.sd_setImage(with: URL(string: socialApp.artworkUrl512))
+//      return cell
+//    default:
+//      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: centerCellid, for: indexPath) as! AppRowCell
+//      var appGroup: AppGroup?
+//      switch indexPath.section {
+//      case 1: appGroup = games
+//      case 2: appGroup = topGrossingApps
+//      case 3: appGroup = topPaid
+//      default: appGroup = topPaid
+//      }
+//      cell.app = appGroup?.feed.results[indexPath.item]
+//      return cell
+//    }
+//
+//  }
   
   
   
   
-  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let appId: String
-    switch indexPath.section {
-    case 0: return
-    case 1:
-      appId = games?.feed.results[indexPath.item].id ?? ""
-    case 2:
-      appId = topGrossingApps?.feed.results[indexPath.item].id ?? ""
-    case 3:
-      appId = topPaid?.feed.results[indexPath.item].id ?? ""
-    default: return
-    }
-    let gamesDetailController = AppsDetailsController(appId: appId)
-     navigationController?.pushViewController(gamesDetailController, animated: true)
-    
-  }
+//  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    let appId: String
+//    switch indexPath.section {
+//    case 0: return
+//    case 1:
+//      appId = games?.feed.results[indexPath.item].id ?? ""
+//    case 2:
+//      appId = topGrossingApps?.feed.results[indexPath.item].id ?? ""
+//    case 3:
+//      appId = topPaid?.feed.results[indexPath.item].id ?? ""
+//    default: return
+//    }
+//    let gamesDetailController = AppsDetailsController(appId: appId)
+//     navigationController?.pushViewController(gamesDetailController, animated: true)
+//
+//  }
   
   
   

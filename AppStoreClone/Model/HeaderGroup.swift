@@ -16,7 +16,7 @@ struct HeaderGroup: Decodable {
 }
 
 
-struct ResultHeader: Decodable {
+struct ResultHeader: Decodable, Hashable {
   let description: String
   let artistName: String
   let artworkUrl512: String
