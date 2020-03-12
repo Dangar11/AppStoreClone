@@ -2,7 +2,7 @@
 AppStore app build in code💻 without Storyboards -> **MVC-N Pattern** 
 
 ## Skills in this app 
-
+* iOS 13 Support CompositionalLayout & Diffable Datasource
 * Nested UICollectionViews
 * Animation using Auto Layout constraints
 * Animating Child View Controller objects
@@ -17,6 +17,7 @@ AppStore app build in code💻 without Storyboards -> **MVC-N Pattern**
 * Dependency Injection
 * UIVisualEffectView & UIBlurEffect
 * Floating Control
+
 
 ## 1-st Screen
 ![](https://media.giphy.com/media/h8yah3wNtUE4QV1vlv/giphy.gif)
