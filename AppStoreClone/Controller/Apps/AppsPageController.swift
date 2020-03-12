@@ -79,7 +79,7 @@ class AppsPageController: BaseListController {
       
       dispatchGroup.leave()
       group2 = appGroup
-      
+
     }
     
     dispatchGroup.enter()

@@ -39,7 +39,7 @@ class AppsHorizontalController: HorizontalSnappingController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppRowCell
     let app = appGroup?.feed.results[indexPath.item]
-    cell.compamyLabel.text = app?.artistName
+    cell.companyLabel.text = app?.artistName
     cell.nameLabel.text = app?.name
     cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
     

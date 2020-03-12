@@ -29,6 +29,12 @@ class CompositionalController: UICollectionViewController {
   
   //MARK: - Properties
   
+  var socialApps = [ResultHeader]()
+  var games: AppGroup?
+  var topGrossingApps: AppGroup?
+  var topPaid: AppGroup?
+  
+  
   let topCellId = "topCellId"
   let centerCellid = "centerCellId"
   let headerId = "headerId"
@@ -43,6 +49,8 @@ class CompositionalController: UICollectionViewController {
     collectionView.register(CompositionalHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: topCellId)
     collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: centerCellid)
+    
+    fetchAppsDispatchGroup()
   }
   
   
@@ -110,11 +118,20 @@ class CompositionalController: UICollectionViewController {
     
     return section
   }
+  
+
 
   
   //MARK: - UICollectionView methods
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 8
+    switch section {
+    case 0: return socialApps.count
+    case 1: return games?.feed.results.count ?? 0
+    case 2: return topGrossingApps?.feed.results.count ?? 0
+    case 3: return topPaid?.feed.results.count ?? 0
+    default: return 0
+    }
+    
   }
   
   
@@ -124,7 +141,19 @@ class CompositionalController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+    let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! CompositionalHeader
+    var title: String?
+    
+    switch indexPath.section {
+    case 1: title = games?.feed.title
+    case 2: title = topGrossingApps?.feed.title
+    case 3: title = topPaid?.feed.title
+    default: title = "Apps"
+    }
+    
+    header.label.text = title
+    return header
+    
   }
   
   
@@ -133,18 +162,92 @@ class CompositionalController: UICollectionViewController {
     
     switch indexPath.section {
     case 0:
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topCellId, for: indexPath)
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topCellId, for: indexPath) as! AppsHeaderCell
+      let socialApp = self.socialApps[indexPath.item]
+      cell.companyLabel.text = socialApp.artistName
+      cell.titleLabel.text = socialApp.description
+      cell.imageView.sd_setImage(with: URL(string: socialApp.artworkUrl512))
       return cell
     default:
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: centerCellid, for: indexPath)
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: centerCellid, for: indexPath) as! AppRowCell
+      var appGroup: AppGroup?
+      switch indexPath.section {
+      case 1: appGroup = games
+      case 2: appGroup = topGrossingApps
+      case 3: appGroup = topPaid
+      default: appGroup = topPaid
+      }
+      cell.app = appGroup?.feed.results[indexPath.item]
       return cell
     }
-    
     
   }
   
   
+  
+  
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let appId: String
+    switch indexPath.section {
+    case 0: return
+    case 1:
+      appId = games?.feed.results[indexPath.item].id ?? ""
+    case 2:
+      appId = topGrossingApps?.feed.results[indexPath.item].id ?? ""
+    case 3:
+      appId = topPaid?.feed.results[indexPath.item].id ?? ""
+    default: return
+    }
+    let gamesDetailController = AppsDetailsController(appId: appId)
+     navigationController?.pushViewController(gamesDetailController, animated: true)
+    
+  }
+  
+  
+  
 }
+  
+
+extension CompositionalController {
+  
+  func fetchAppsDispatchGroup() {
+    
+    let dispatchGroup = DispatchGroup()
+    
+    dispatchGroup.enter()
+    Service.shared.fetchGames { (appGroup, error) in
+      self.games = appGroup
+      dispatchGroup.leave()
+    }
+    
+    dispatchGroup.enter()
+    Service.shared.fetchTopGrossing { (appGroup, error) in
+      self.topGrossingApps = appGroup
+      dispatchGroup.leave()
+    }
+    
+    dispatchGroup.enter()
+    Service.shared.fetchTopPaid { (appGroup, error) in
+      self.topPaid = appGroup
+      dispatchGroup.leave()
+    }
+    
+    dispatchGroup.enter()
+    Service.shared.fetchSocialApps { (apps, error) in
+      dispatchGroup.leave()
+      self.socialApps = apps?.results ?? []
+    }
+    
+    dispatchGroup.notify(queue: .main) {
+      self.collectionView.reloadData()
+    }
+  }
+  
+  
+}
+  
+
+
 
 
 
