@@ -28,6 +28,7 @@ enum AppSection {
   case topSocial
   case games
   case topGrossing
+  case topPaid
 }
 
 
@@ -74,6 +75,11 @@ class CompositionalController: UICollectionViewController {
     collectionView.register(CompositionalHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: topCellId)
     collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: centerCellid)
+    
+    navigationItem.rightBarButtonItem = .init(title: "Fetch Top Paid", style: .plain, target: self, action: #selector(handleFetchTopPaid))
+    
+    collectionView.refreshControl = UIRefreshControl()
+    collectionView.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
     
 //    fetchAppsDispatchGroup()
     setupDiffableDatasourse()
@@ -145,6 +151,8 @@ class CompositionalController: UICollectionViewController {
     return section
   }
   
+  
+  //MARK: - @OBJC
   @objc func handleGet(button: UIView) {
     
     var superview = button.superview
@@ -169,70 +177,109 @@ class CompositionalController: UICollectionViewController {
   }
   
   
-  private func setupDiffableDatasourse() {
-    
-    //data to diffableDataSource
-    
-    collectionView.dataSource = diffableDataSource
-    
-    diffableDataSource.supplementaryViewProvider = .some({ (collectionView, kind, indexPath) -> UICollectionReusableView? in
-      let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.headerId, for: indexPath) as! CompositionalHeader
-      
-      let snapshot = self.diffableDataSource.snapshot()
-      guard let object = self.diffableDataSource.itemIdentifier(for: indexPath) else { return nil }
-      let section = snapshot.sectionIdentifier(containingItem: object)
-      
-      switch section {
-      case .games:
-        header.label.text = "Games"
-      case .topGrossing:
-        header.label.text = "Top Grossing"
-      default:
-        header.label.text = ""
-      }
-      return header
-    })
-    
-    Service.shared.fetchSocialApps { (socialApps, error) in
-      if let error = error {
-        print("Failed to fetch SocialApps " + error.localizedDescription)
-      }
-      
-      
-      Service.shared.fetchGames { (games, error) in
-        if let error = error {
-          print("Failed to fetch Games " + error.localizedDescription)
-        }
-        
-        Service.shared.fetchTopGrossing { (topGrossing, error) in
-          if let error = error {
-            print("Failed to fetch topGrossing " + error.localizedDescription)
-          }
-          
-          var snapshot = self.diffableDataSource.snapshot()
-          
-          //Social
-          snapshot.appendSections([.topSocial, .games, .topGrossing])
-          snapshot.appendItems(socialApps?.results ?? [], toSection: .topSocial)
-          //GAMES
-          let gamesObjects = games?.feed.results ?? []
-          let topGrossingObjects = topGrossing?.feed.results ?? []
-          snapshot.appendItems(gamesObjects, toSection: .games)
-          snapshot.appendItems(topGrossingObjects, toSection: .topGrossing)
-          self.diffableDataSource.apply(snapshot)
   
-        }
+  @objc func handleFetchTopPaid() {
+    
+    Service.shared.fetchTopPaid { [weak self] (appGroup, error) in
+      guard let self = self else { return }
+      if let error = error {
+        print("Failed to fetch Top Paid " + error.localizedDescription)
       }
+      
+      var snapshot = self.diffableDataSource.snapshot()
+      
+      snapshot.insertSections([.topPaid], afterSection: .games)
+      snapshot.appendItems(appGroup?.feed.results ?? [], toSection: .topPaid)
+      
+      self.diffableDataSource.apply(snapshot)
+      
     }
     
-    
   }
+  
+  
+  @objc func handleRefresh() {
+    
+    collectionView.refreshControl?.endRefreshing()
+    
+    //Handle Deletion
+//    var snapshot = diffableDataSource.snapshot()
+//
+//    snapshot.deleteSections([.games])
+//
+//    diffableDataSource.apply(snapshot)
+//
+  }
+  
+  
+ 
   
 
 
   
   //MARK: - UICollectionView methods
 
+  private func setupDiffableDatasourse() {
+     
+     //data to diffableDataSource
+     
+     collectionView.dataSource = diffableDataSource
+     
+     diffableDataSource.supplementaryViewProvider = .some({ (collectionView, kind, indexPath) -> UICollectionReusableView? in
+       let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.headerId, for: indexPath) as! CompositionalHeader
+       
+       let snapshot = self.diffableDataSource.snapshot()
+       guard let object = self.diffableDataSource.itemIdentifier(for: indexPath) else { return nil }
+       let section = snapshot.sectionIdentifier(containingItem: object)
+       
+       switch section {
+       case .games:
+         header.label.text = "Games"
+       case .topGrossing:
+         header.label.text = "Top Grossing"
+       case .topPaid:
+         header.label.text = "Top Paid"
+       default:
+         header.label.text = ""
+       }
+       return header
+     })
+     
+     Service.shared.fetchSocialApps { (socialApps, error) in
+       if let error = error {
+         print("Failed to fetch SocialApps " + error.localizedDescription)
+       }
+       
+       
+       Service.shared.fetchGames { (games, error) in
+         if let error = error {
+           print("Failed to fetch Games " + error.localizedDescription)
+         }
+         
+         Service.shared.fetchTopGrossing { (topGrossing, error) in
+           if let error = error {
+             print("Failed to fetch topGrossing " + error.localizedDescription)
+           }
+           
+           var snapshot = self.diffableDataSource.snapshot()
+           
+           //Social
+           snapshot.appendSections([.topSocial, .games, .topGrossing])
+           snapshot.appendItems(socialApps?.results ?? [], toSection: .topSocial)
+           //GAMES
+           let gamesObjects = games?.feed.results ?? []
+           let topGrossingObjects = topGrossing?.feed.results ?? []
+           snapshot.appendItems(gamesObjects, toSection: .games)
+           snapshot.appendItems(topGrossingObjects, toSection: .topGrossing)
+           self.diffableDataSource.apply(snapshot)
+   
+         }
+       }
+     }
+     
+     
+   }
+  
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
