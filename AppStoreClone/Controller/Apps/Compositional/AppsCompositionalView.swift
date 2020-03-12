@@ -51,6 +51,8 @@ class CompositionalController: UICollectionViewController {
     } else if let object = object as? FeedResult {
       let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: self.centerCellid, for: indexPath) as! AppRowCell
       cell.app = object
+      
+      cell.getButton.addTarget(self, action: #selector(self.handleGet), for: .primaryActionTriggered)
       return cell
     }
     
@@ -143,6 +145,29 @@ class CompositionalController: UICollectionViewController {
     return section
   }
   
+  @objc func handleGet(button: UIView) {
+    
+    var superview = button.superview
+    
+    // reach the parent cell of get button
+    while superview != nil {
+      if let cell = superview as? UICollectionViewCell {
+        guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+        guard let objectClickled = diffableDataSource.itemIdentifier(for: indexPath) else { return }
+        
+        var snapshot = diffableDataSource.snapshot()
+        snapshot.deleteItems([objectClickled])
+        diffableDataSource.apply(snapshot)
+        
+        
+      }
+      superview = superview?.superview
+    }
+    
+    
+    
+  }
+  
   
   private func setupDiffableDatasourse() {
     
@@ -207,17 +232,18 @@ class CompositionalController: UICollectionViewController {
 
   
   //MARK: - UICollectionView methods
-//  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//    switch section {
-//    case 0: return socialApps.count
-//    case 1: return games?.feed.results.count ?? 0
-//    case 2: return topGrossingApps?.feed.results.count ?? 0
-//    case 3: return topPaid?.feed.results.count ?? 0
-//    default: return 0
-//    }
-//
-//  }
+
   
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    let object = diffableDataSource.itemIdentifier(for: indexPath)
+      
+     if let object = object as? FeedResult {
+      let appDetailController = AppsDetailsController(appId: object.id)
+      navigationController?.pushViewController(appDetailController, animated: true)
+    }
+    
+  }
   
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -240,52 +266,6 @@ class CompositionalController: UICollectionViewController {
 
   }
   
-  
-  
-//  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//    switch indexPath.section {
-//    case 0:
-//      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topCellId, for: indexPath) as! AppsHeaderCell
-//      let socialApp = self.socialApps[indexPath.item]
-//      cell.companyLabel.text = socialApp.artistName
-//      cell.titleLabel.text = socialApp.description
-//      cell.imageView.sd_setImage(with: URL(string: socialApp.artworkUrl512))
-//      return cell
-//    default:
-//      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: centerCellid, for: indexPath) as! AppRowCell
-//      var appGroup: AppGroup?
-//      switch indexPath.section {
-//      case 1: appGroup = games
-//      case 2: appGroup = topGrossingApps
-//      case 3: appGroup = topPaid
-//      default: appGroup = topPaid
-//      }
-//      cell.app = appGroup?.feed.results[indexPath.item]
-//      return cell
-//    }
-//
-//  }
-  
-  
-  
-  
-//  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    let appId: String
-//    switch indexPath.section {
-//    case 0: return
-//    case 1:
-//      appId = games?.feed.results[indexPath.item].id ?? ""
-//    case 2:
-//      appId = topGrossingApps?.feed.results[indexPath.item].id ?? ""
-//    case 3:
-//      appId = topPaid?.feed.results[indexPath.item].id ?? ""
-//    default: return
-//    }
-//    let gamesDetailController = AppsDetailsController(appId: appId)
-//     navigationController?.pushViewController(gamesDetailController, animated: true)
-//
-//  }
   
   
   
